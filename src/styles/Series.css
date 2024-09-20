@@ -1,0 +1,45 @@
+.backlink {
+    font-style: italic;
+    color: #747474;
+    text-decoration: none;
+}
+
+.series-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 64px;
+}
+
+.series-title {
+    margin: 4px 0px 16px 0px;
+}
+
+.cover {
+    width: 160px;
+    height: 160px;
+    min-width: 160px;
+    margin-left: 96px;
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.series-end {
+    display: flex;
+    justify-content: center;
+}
+
+.end-backlink {
+    color: #747474;
+    text-decoration: none;
+    margin-top: 72px;
+}
+
+
+
+@media only screen and (max-width: 1260px) {
+
+    .cover {
+        display: none;
+    }
+
+}

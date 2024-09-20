@@ -1,0 +1,97 @@
+.partnerships-wrapper {
+    margin-top: -64px;
+}
+
+.partner {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 160px;
+}
+
+.partner-info {
+    width: 544px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.partner-info h2 {
+    margin-bottom: 16px;
+}
+
+.visit-button {
+    height: 36px;
+    width: 144px;
+    background-color: rgb(0, 0, 0);
+    border-width: 0;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+    background-image: linear-gradient(#ffffff, #ffffff);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transition: .3s;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    align-items: center;
+
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.visit-button:hover {
+    background-size: 100% 0%;
+}
+
+.visit-button p {
+    font-family: Red Hat Display, sans-serif;
+    font-weight: 600;
+    mix-blend-mode: difference;
+
+    mix-blend-mode: difference;
+    background: white;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.BMA-After {
+    display: none;
+}
+
+
+@media only screen and (max-width: 1260px) {
+
+    .partnerships-wrapper {
+        margin-top: 0px;
+    }
+
+    .partner {
+        margin-top: 72px;
+        flex-direction: column;
+    }
+
+    .partner-info {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .visit-button {
+        display: none;
+    }
+
+    .BMA-Before {
+        display: none;
+    }
+
+    .BMA-After {
+        display: block;
+    }
+
+    .break {
+        display: none;
+    }
+
+}

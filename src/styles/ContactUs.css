@@ -1,0 +1,155 @@
+.contactus-main {
+    display: flex;
+    margin-top: 16px;
+}
+
+.contactFormArea {
+    width: 100%;
+}
+
+.sidebar {
+    margin-left: 128px;
+}
+
+.contact-map {
+    width: 352px;
+    aspect-ratio: 1;
+    margin-bottom: 16px;
+    border-width: 0;
+}
+
+.mail {
+    margin-top: 32px;
+}
+
+.call {
+    margin-top: 16px;
+}
+
+
+/* CONTACT FORM */
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+}
+
+.contactFormLabel {
+    margin-top: 32px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: Red Hat Display, sans-serif;
+}
+
+.textinput {
+    background-color: #F6F6F6;
+    border: 0px;
+    border-bottom: solid 1px;
+    border-color: #747474;
+    height: 32px;
+
+    font-size: 15px;
+    font-weight: 400;
+    font-family: Red Hat Display, sans-serif;
+    padding: 8px;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #82e579;
+    background-color: #F9F9F9;
+}
+
+.area {
+    min-height: 240px;
+    resize: none;
+    border: none;
+}
+
+.area:focus {
+    outline: none;
+    border: solid 1px #82e579;
+    background-color: #F9F9F9;
+    padding: 7px;
+}
+
+
+/* SEND BUTTON */
+
+.sendbtn {
+    align-self: flex-end;
+
+    height: 32px;
+    width: 84px;
+    margin-top: 24px;
+
+    background-color: black;
+    border-width: 0;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+    background-image: linear-gradient(#ffffff, #ffffff);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    transition: .1s;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 0;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.sendbtn:hover {
+    background-size: 100% 0%;
+}
+
+.sendbtn p {
+    font-family: Red Hat Display, sans-serif;
+    font-weight: 500;
+    background: white;
+    mix-blend-mode: difference;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btntext {
+    width: 128px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+}
+
+.btnsend {
+    height: 32px;
+    width: 32px;
+    min-width: 32px;
+    mix-blend-mode: difference;
+    background-repeat: no-repeat;
+    background-position: 7px;
+}
+
+
+
+
+@media only screen and (max-width: 1260px) {
+
+    .contactus-main {
+        display: block;
+    }
+
+    .sidebar {
+        margin: 72px 0 0 0;
+    }
+
+    .contact-map {
+        width: 100%;
+    }
+
+}

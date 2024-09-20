@@ -1,0 +1,287 @@
+#audio-player-container {
+    --seek-before-width: 0%;
+    --buffering-visibility: hidden;
+    --buffered-width: 0%;
+    padding: 16px;
+    position: relative;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#play-icon {
+    border: 0;
+    cursor: pointer;
+    outline: none;
+    float: left;
+    width: 64px;
+    height: 64px;
+    background: #F6F6F6 no-repeat center;
+    margin-bottom: 5px;
+}
+
+.play-icon-hover {
+    width: 100%;
+    height: 100%;
+    transition: 100ms;
+    mix-blend-mode: darken;
+    transition: 0.2s;
+}
+
+.play-icon-hover:hover {
+    background-color: #E6E6E6
+}
+
+.time {
+    display: inline-block;
+    width: 56px;
+    text-align: center;
+}
+
+input[type="range"] {
+    position: absolute;
+    -webkit-appearance: none;
+    width: 880px;
+    left: 88px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+    background: linear-gradient(to right, #ADADAD var(--buffered-width), #E6E6E6 var(--buffered-width));
+    border: solid white;
+    border-width: 9px 0px 9px 0px;
+}
+
+.bufferingWrapper {
+    visibility: var(--buffering-visibility);
+    position: absolute;
+    left: 88px;
+    pointer-events: none;
+    width: 880px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.bufferingClipper {
+    width: var(--seek-after-width);
+    height: 2px;
+    overflow: hidden;
+}
+
+.buffering {
+    width: 1000px;
+    border-top: solid;
+    border-image: 12 repeating-linear-gradient(45deg, #ADADAD 0, #ADADAD 3px, #E6E6E6 0, #E6E6E6 6px, #ADADAD 0, #ADADAD 9px, #E6E6E6 0, #E6E6E6 12px);
+    margin-left: -100px;
+    animation: buffering 200ms infinite linear;
+}
+
+
+@keyframes buffering {
+    0% {
+        transform: translateX(10px)
+    }
+}
+
+
+
+input[type="range"]::before {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 0;
+    translate: 0 -50%;
+    width: var(--seek-before-width);
+    height: 2px;
+    background-color: #747474;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    position: relative;
+    -webkit-appearance: none;
+    box-sizing: content-box;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #747474;
+    cursor: pointer;
+    margin: -3px 0 0 0;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+    background: #747474;
+}
+
+input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+    background: linear-gradient(to right, #ADADAD var(--buffered-width), #E6E6E6 var(--buffered-width));
+    border: solid white;
+    border-width: 9px 0px 9px 0px;
+    -moz-box-sizing: border-box;
+}
+
+input[type="range"]::-moz-range-progress {
+    background-color: #747474;
+}
+
+input[type="range"]::-moz-focus-outer {
+    border: 0;
+}
+
+input[type="range"]::-moz-range-thumb {
+    box-sizing: content-box;
+    border: 1px solid #747474;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #747474;
+    cursor: pointer;
+}
+
+input[type="range"]:active::-moz-range-thumb {
+    transform: scale(1.2);
+    background: #747474;
+}
+
+input[type="range"]::-ms-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: transparent;
+    border: solid transparent;
+    color: transparent;
+}
+
+input[type="range"]::-ms-fill-lower {
+    background-color: #747474;
+}
+
+input[type="range"]::-ms-fill-upper {
+    background: linear-gradient(to right, #ADADAD var(--buffered-width), #E6E6E6 var(--buffered-width));
+}
+
+input[type="range"]::-ms-thumb {
+    box-sizing: content-box;
+    border: 1px solid #747474;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #747474;
+    cursor: pointer;
+}
+
+input[type="range"]:active::-ms-thumb {
+    transform: scale(1.2);
+    background: #747474;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    position: fixed;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 400px;
+    z-index: 2;
+    filter: drop-shadow(0 0 400px rgb(0, 0, 0));
+}
+
+.modal h2 {
+    margin-bottom: 16px;
+}
+
+.modal ul {
+    list-style: none;
+    padding: 0;
+}
+
+.modal ul li {
+    margin-bottom: 10px;
+}
+
+.modal button {
+    margin-top: 32px;
+    height: 32px;
+    width: 64px;
+    background: #E6E6E6;
+    border: none;
+    cursor: pointer;
+    float: right;
+    font-family: red-hat-display, sans-serif;
+    font-weight: 500;
+}
+
+small a {
+    font-size: small;
+}
+
+
+
+
+@media only screen and (max-width: 1260px) {
+
+
+    #audio-player-container {
+        width: 100%;
+    }
+
+    .scrubber {
+        width: 100%;
+    }
+
+    .sermonMain {
+        width: 100%;
+    }
+
+    input[type="range"] {
+        width: calc(100% - 160px);
+        margin-left: -16px;
+    }
+
+    #duration {
+        justify-self: flex-end;
+    }
+
+    .bufferingWrapper {
+        width: auto;
+    }
+
+    .modal {
+        width: auto;
+    }
+
+    .buffering {
+        width: 100%;
+    }
+
+
+}

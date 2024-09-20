@@ -1,0 +1,621 @@
+.flex {
+    display: flex;
+}
+
+.hero {
+    opacity: 1;
+    background-image: url("../assets/john-preaching.webp");
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+mark {
+    background-color: transparent;
+    padding: unset;
+}
+
+.backdropblur {
+    height: 100%;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+}
+
+.hero-content {
+    z-index: 10;
+    width: 576px;
+    height: 688px;
+    background-color: #fff;
+    padding: 72px 128px 96px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cta {
+    font-family: warnock_prosemibold_subhead, Palatino Linotype, Book Antiqua, Palatino, serif;
+    font-size: 50px;
+    line-height: 120%;
+    letter-spacing: -0.5px;
+}
+
+.gatherings {
+    display: flex;
+}
+
+.indentGuide {
+    border-left: 1px solid #C7C7C7;
+    height: auto;
+    margin-right: 32px;
+}
+
+.hero-edge {
+    width: 200px;
+    height: 100%;
+    max-width: 200px;
+    background-color: #fff;
+    position: absolute;
+}
+
+.corner1 {
+    width: 100px;
+    height: auto;
+    background-image: url("../assets/corner.svg");
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100px;
+}
+
+.programs {
+    margin-top: 96px;
+    margin-bottom: 128px;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    grid-row-gap: 32px;
+    grid-column-gap: 16px;
+}
+
+.programs-breaker {
+    border-left: 1px solid #C7C7C7;
+    height: 100%;
+    grid-row: span 2;
+}
+
+.heading-3 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.alpha {
+    grid-column-start: 3;
+}
+
+.growthGroups {
+    grid-row: span 2;
+}
+
+.waw-edge {
+    width: 200px;
+    height: 100%;
+    max-width: 200px;
+    background-color: #fff;
+    position: absolute;
+}
+
+.waw-header {
+    z-index: 10;
+    width: 576px;
+    height: 100%;
+    background-color: #fff;
+    position: relative;
+    height: 120px;
+}
+
+.corner2 {
+    width: 100px;
+    height: auto;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.corner2::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url("../assets/corner.svg");
+    background-repeat: no-repeat;
+    transform: rotate(90deg);
+}
+
+.waw-banner {
+    height: 120px;
+    background-image: url("../assets/worship.webp");
+    background-position: 50%;
+    background-size: cover;
+    overflow: hidden;
+    margin-bottom: 96px;
+}
+
+.whoarewe {
+    height: 100%;
+    align-items: center;
+    font-size: 48px;
+    font-weight: 600;
+    display: flex;
+    margin: 0;
+}
+
+.wemask {
+    position: absolute;
+    translate: calc((100vw - 1120px)/2*-1);
+    width: 100vw;
+    height: 120px;
+    padding-left: 10px;
+    font-style: normal;
+    background-image: url("../assets/worship.webp");
+    background-position: 50%;
+    background-size: cover;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding-left: calc(((100vw - 1120px)/2) + 198px);
+    padding-top: 38px;
+}
+
+.statement {
+    font-family: warnock_proregular, Palatino Linotype, Book Antiqua, Palatino, serif;
+    font-size: 40px;
+    font-weight: normal;
+    letter-spacing: -1px;
+}
+
+.statement em,
+.statement i {
+    font-family: warnock_proitalic, Palatino Linotype, Book Antiqua, Palatino, serif;
+}
+
+.waw-img {
+    width: 544px;
+    height: 320px;
+    object-fit: cover;
+}
+
+.purpose-statement {
+    width: 430px;
+}
+
+.values-statement {
+    width: 448px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+}
+
+.values-blurb {
+    text-align: center;
+    margin-bottom: 72px;
+    margin-top: 8px;
+}
+
+.values-section {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 104px;
+    margin-bottom: 152px;
+    display: flex;
+}
+
+.values {
+    z-index: 1;
+    width: 928px;
+    justify-content: space-between;
+    margin-top: 25px;
+    display: flex;
+    position: absolute;
+}
+
+.value-p {
+    width: 210px;
+    font-family: warnock_proregular, Palatino Linotype, Book Antiqua, Palatino, serif;
+    font-size: 16px;
+    font-style: italic;
+}
+
+.freedom {
+    padding: 0 10px 0 10px;
+}
+
+.value {
+    text-align: center;
+    position: static;
+}
+
+.value-heading {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.value-number {
+    font-family: warnock_proregular, Palatino Linotype, Book Antiqua, Palatino, serif;
+    font-size: 52px;
+}
+
+.value-number._1-rotation {
+    transform: rotate(9deg);
+}
+
+.value-number._2-rotation {
+    transform: rotate(-7deg);
+}
+
+.value-number._3-rotation {
+    transform: rotate(8deg);
+}
+
+.value-number._4-rotation {
+    transform: rotate(-7deg);
+}
+
+.waw-section {
+    justify-content: space-between;
+    display: flex;
+}
+
+.vision-statement {
+    width: 488px;
+}
+
+.main {
+    background-image: url("../assets/background.svg");
+    background-position: 50% 45%;
+    background-repeat: repeat-x;
+    background-size: 2308px;
+}
+
+.ellipsis {
+    text-align: center;
+    margin-top: 96px;
+    margin-bottom: 96px;
+}
+
+.ellipsis h1 {
+    font-family: warnock_proregular, Palatino Linotype, Book Antiqua, Palatino, serif;
+    font-size: 100px;
+    font-weight: 400;
+    letter-spacing: 7px;
+}
+
+.network-name {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.network-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.network-blurb {
+    max-width: 280px;
+}
+
+.network {
+    width: 512px;
+    height: 256px;
+    flex-direction: row;
+    justify-content: space-between;
+    display: flex;
+    margin-top: 80px;
+}
+
+.network-cta {
+    margin-bottom: 10px;
+}
+
+.network-contact {
+    transform: translateY(2px);
+}
+
+.network-left {
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+}
+
+.network-margin {
+    margin-bottom: 2px;
+}
+
+.paragraphgap {
+    margin-top: 16px;
+}
+
+.networks {
+    justify-content: space-between;
+    padding-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.paragraphnetwork {
+    width: 288px;
+    margin-top: 8px;
+}
+
+.map {
+    height: 192px;
+    width: 192px;
+    margin-top: 8px;
+    border: 0;
+}
+
+.network-right {
+    width: 192px;
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+}
+
+.value-icons {
+    width: 928px;
+    mix-blend-mode: overlay;
+    justify-content: space-between;
+    display: flex;
+}
+
+.bibleicon {
+    transform: scale(1.05)translate(0, 10px)rotate(-6deg);
+}
+
+.participationicon {
+    transform: scale(1.04)translate(10px);
+}
+
+.freedomicon {
+    transform: scale(.93)rotate(-13deg);
+}
+
+.prayericon {
+    transform: rotate(4deg);
+}
+
+.value-icon {
+    width: 200px;
+    height: 200px;
+}
+
+.value-icon img {
+    max-width: 100%;
+}
+
+.hero-vision {
+    font-weight: 600;
+}
+
+.values-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.timetable p{
+    font-family: Red Hat Display, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+}
+
+.timetable strong{
+    font-weight: 800;
+}
+
+
+
+
+@media only screen and (max-width: 1260px) {
+
+
+    mark {
+        background-color: white;
+        padding: 0 16px 0 16px;
+    }
+
+    .hero {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url("../assets/john-preaching.webp");
+        color: white;
+    }
+
+    .hero-content {
+        width: auto;
+        height: 100vh;
+        min-height: 840px;
+        max-height: 944px;
+        background-color: transparent;
+        padding: 72px 0px 96px 0px;
+    }
+
+    .flex {
+        justify-content: center;
+    }
+
+    .network {
+        flex-direction: column;
+        width: auto;
+        height: auto;
+        margin-top: 80px;
+    }
+
+    .networks {
+        margin-top: -16px;
+        flex-direction: column;
+    }
+
+    .waw-section {
+        flex-direction: column;
+    }
+
+    .values {
+        width: auto;
+        flex-direction: column;
+    }
+
+    .waw-img {
+        width: 100vw;
+        margin: 0 -40px 0 -40px;
+        height: unset;
+        margin-top: -64px;
+        z-index: -1;
+        height: 400px;
+    }
+
+    .value-icons {
+        width: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .purpose-statement {
+        margin-left: -16px;
+        width: auto;
+    }
+
+    .vision-statement {
+        width: auto;
+        margin-top: -112px;
+        z-index: 2;
+    }
+
+    .waw-header {
+        width: auto;
+    }
+
+    .values-statement {
+        width: auto;
+    }
+
+    .corner1 {
+        display: none;
+    }
+
+    .hero-edge {
+        display: none;
+    }
+
+    .programs {
+        display: flex;
+        flex-direction: column;
+        grid-row-gap: 72px;
+    }
+
+    .programs-breaker {
+        display: none;
+    }
+
+    .corner2 {
+        display: none;
+    }
+
+    .waw-edge {
+        display: none;
+    }
+
+    .wemask {
+        position: relative;
+        translate: unset;
+        width: auto;
+        background-size: unset;
+        padding-left: 10px;
+    }
+
+    .waw-banner {
+        background-image: none;
+        margin-bottom: 80px;
+    }
+
+    .main {
+        background-position: 45% 34%;
+    }
+
+
+    .values {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin: 0px 40px 0 40px;
+    }
+
+    .value-icons {
+        width: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        row-gap: 55px;
+        width: 100%;
+        margin-top: -32px;
+
+    }
+
+    .value-icon {
+        width: 120px;
+        height: 160px;
+        margin: auto;
+    }
+
+    .value-p {
+        width: 100%;
+    }
+
+    .values-blurb {
+        margin-bottom: 80px;
+    }
+
+    .vision-img {
+        z-index: 0;
+    }
+
+    .values-section {
+        margin-bottom: 240px;
+    }
+
+    .network-title {
+        flex-direction: column;
+    }
+
+    .network-blurb {
+        max-width: none;
+        margin-top: 16px;
+    }
+
+    .paragraphnetwork {
+        width: auto;
+        margin-bottom: 24px;
+    }
+
+    .map {
+        height: auto;
+        width: 100%;
+        margin-top: 24px;
+    }
+
+    .network-right {
+        width: 100%;
+    }
+
+    .network-right p {
+        display: none;
+    }
+
+    .gatherings {
+        margin: 24px 0 32px 0
+    }
+
+
+
+}

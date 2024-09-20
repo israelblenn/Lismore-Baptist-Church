@@ -1,0 +1,317 @@
+ul {
+    list-style-type: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+}
+
+nav {
+    height: 80px;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.logo {
+    margin-top: 2px;
+    height: 48px;
+}
+
+.navLinks {
+    width: 544px;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+    display: flex;
+}
+
+.navLink {
+    font-weight: 800;
+    font-size: 16px;
+    text-decoration: none;
+    position: relative;
+    color: transparent;
+    background-color: transparent;
+}
+
+.navLink::before {
+    content: attr(data-text);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    font-weight: 400;
+    width: 100%;
+    color: black;
+    pointer-events: none;
+}
+
+.navLink:hover::before {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.navLink.active::before {
+    font-weight: 800;
+}
+
+.navLink.active:hover::before {
+    text-decoration: none;
+}
+
+.navDivider {
+    width: 1px;
+    height: 26px;
+    background-color: #000;
+    margin-left: 5px;
+}
+
+.login {
+    color: #9c9c9c;
+    font-size: 16px;
+    text-decoration: none;
+    transition: 50ms;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 40px;
+    padding: 0 15px 0 15px;
+    margin-left: -10px;
+    cursor: pointer;
+}
+
+.login:hover {
+    color: #000;
+    background-color: #f6f6f6;
+}
+
+.mobile-navigation {
+    display: none;
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 1260px) {
+
+
+    .mobile-navigation {
+        display: block;
+    }
+
+    .desktop-navigation {
+        display: none;
+    }
+
+    nav {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .navLink {
+        font-size: 24px;
+        line-height: 24px;
+    }
+
+    .navLink::before {
+        margin-left: 24px;
+        justify-content: left;
+        position: relative;
+        color: white;
+    }
+
+    .navDivider {
+        display: none;
+    }
+
+    .login {
+        display: none;
+    }
+
+
+
+    .hamburger-menu {
+        position: fixed;
+        z-index: 4;
+        right: 0;
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    :root {
+        --bar-width: 18px;
+        --bar-height: 2px;
+        --hamburger-gap: 6px;
+        --foreground: #fff;
+        --background: #000;
+        --hamburger-margin: 16px;
+        --animation-timing: 200ms ease-in-out;
+        --hamburger-height: calc(var(--bar-height) * 3 + var(--hamburger-gap) * 2);
+    }
+
+    .hamburger {
+        --x-width: calc(var(--hamburger-height) * 1.41421356237);
+        right: var(--hamburger-margin);
+        display: flex;
+        flex-direction: column;
+        gap: var(--hamburger-gap);
+        width: max-content;
+        position: absolute;
+        top: var(--hamburger-margin);
+        left: var(--hamburger-margin);
+        z-index: 2;
+        cursor: pointer;
+        justify-self: flex-end;
+        max-width: 18px;
+        mix-blend-mode: difference;
+        pointer-events: auto
+    }
+
+    .hamburger:has(input:checked) {
+        --foreground: #fff;
+        --background: #000;
+    }
+
+    .hamburger:has(input:focus-visible)::before,
+    .hamburger:has(input:focus-visible)::after,
+    .hamburger input:focus-visible {
+        border: 1px solid var(--background);
+        box-shadow: 0 0 0 1px var(--foreground);
+    }
+
+    .hamburger::before,
+    .hamburger::after,
+    .hamburger input {
+        content: "";
+        width: var(--bar-width);
+        height: var(--bar-height);
+        background-color: var(--foreground);
+        border-radius: 9999px;
+        transform-origin: left center;
+        transition: opacity var(--animation-timing), width var(--animation-timing),
+            rotate var(--animation-timing), translate var(--animation-timing),
+            background-color var(--animation-timing);
+    }
+
+    .hamburger input {
+        appearance: none;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        pointer-events: none;
+    }
+
+    .hamburger:has(input:checked)::before {
+        rotate: 45deg;
+        width: var(--x-width);
+        translate: 0 calc(var(--bar-height) / -2);
+    }
+
+    .hamburger:has(input:checked)::after {
+        rotate: -45deg;
+        width: var(--x-width);
+        translate: 0 calc(var(--bar-height) / 2);
+    }
+
+    .hamburger input:checked {
+        opacity: 0;
+        width: 0;
+    }
+
+    .navSidebar {
+        transition: opacity var(--animation-timing);
+        opacity: 0;
+        padding: 0 16px;
+        padding-top: 80px;
+        backdrop-filter: blur(10px);
+        color: var(--foreground);
+        width: 100vw;
+        min-height: 100vh;
+    }
+
+    .hamburger:has(input:checked)+.navSidebar {
+        opacity: 1;
+    }
+
+
+    .hamburger.black {
+        --foreground: #000;
+        --background: #fff;
+    }
+
+    .hamburger-tray {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        z-index: 3;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(20px);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 200ms ease-in-out;
+    }
+
+
+    .hamburger-menu:has(input:checked)+.navSidebar {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .navSidebar {
+        transition: opacity var(--animation-timing);
+        opacity: 0;
+        padding: 0 16px;
+        padding-top: 80px;
+        backdrop-filter: blur(10px);
+        color: var(--foreground);
+        width: 100vw;
+        min-height: 100vh;
+        pointer-events: none;
+    }
+
+    .hamburger-tray {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        z-index: 3;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(20px);
+        pointer-events: none;
+    }
+
+    .hamburger-menu.black {
+        --foreground: #000;
+        --background: #fff;
+    }
+
+    .hamburger-menu {
+        pointer-events: none;
+    }
+
+    .mCopyright {
+        position: fixed;
+        bottom: 48px;
+        width: 100vw;
+        left: 0;
+        text-align: center;
+        color: white;
+        opacity: 0.5;
+        font-weight: 400;
+        line-height: 150%;
+    }
+
+    .mCopyright a {
+        color: white;
+    }
+
+}

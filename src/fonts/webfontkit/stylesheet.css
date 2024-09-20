@@ -1,0 +1,332 @@
+/* Red Hat Display */
+
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-Black.woff2') format('woff2'),
+         url('RedHatDisplay-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-ExtraBold.woff2') format('woff2'),
+         url('RedHatDisplay-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-Bold.woff2') format('woff2'),
+         url('RedHatDisplay-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-SemiBold.woff2') format('woff2'),
+         url('RedHatDisplay-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-Medium.woff2') format('woff2'),
+         url('RedHatDisplay-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-Regular.woff2') format('woff2'),
+         url('RedHatDisplay-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-Light.woff2') format('woff2'),
+         url('RedHatDisplay-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-BlackItalic.woff2') format('woff2'),
+         url('RedHatDisplay-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-ExtraBoldItalic.woff2') format('woff2'),
+         url('RedHatDisplay-ExtraBoldItalic.woff') format('woff');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-BoldItalic.woff2') format('woff2'),
+         url('RedHatDisplay-BoldItalic.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-SemiBoldItalic.woff2') format('woff2'),
+         url('RedHatDisplay-SemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-MediumItalic.woff2') format('woff2'),
+         url('RedHatDisplay-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-Italic.woff2') format('woff2'),
+         url('RedHatDisplay-Italic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'red-hat-display';
+    src: url('RedHatDisplay-LightItalic.woff2') format('woff2'),
+         url('RedHatDisplay-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+/* @font-face {
+    font-family: 'rhd-Black';
+    src: url('RedHatDisplay-Black.woff2') format('woff2'),
+         url('RedHatDisplay-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'rhd-ExtraBold';
+    src: url('RedHatDisplay-ExtraBold.woff2') format('woff2'),
+         url('RedHatDisplay-ExtraBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'rhd-Bold';
+    src: url('RedHatDisplay-Bold.woff2') format('woff2'),
+         url('RedHatDisplay-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'rhd-SemiBold';
+    src: url('RedHatDisplay-SemiBold.woff2') format('woff2'),
+         url('RedHatDisplay-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'rhd-Medium';
+    src: url('RedHatDisplay-Medium.woff2') format('woff2'),
+         url('RedHatDisplay-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'rhd-Regular';
+    src: url('RedHatDisplay-Regular.woff2') format('woff2'),
+         url('RedHatDisplay-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'rhd-Light';
+    src: url('RedHatDisplay-Light.woff2') format('woff2'),
+         url('RedHatDisplay-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'rhd-Black-Italic';
+    src: url('RedHatDisplay-BlackItalic.woff2') format('woff2'),
+         url('RedHatDisplay-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'rhd-ExtraBold-Italic';
+    src: url('RedHatDisplay-ExtraBoldItalic.woff2') format('woff2'),
+         url('RedHatDisplay-ExtraBoldItalic.woff') format('woff');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'rhd-Bold-Italic';
+    src: url('RedHatDisplay-BoldItalic.woff2') format('woff2'),
+         url('RedHatDisplay-BoldItalic.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'rhd-SemiBold-Italic';
+    src: url('RedHatDisplay-SemiBoldItalic.woff2') format('woff2'),
+         url('RedHatDisplay-SemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'rhd-Medium-Italic';
+    src: url('RedHatDisplay-MediumItalic.woff2') format('woff2'),
+         url('RedHatDisplay-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'rhd-Italic';
+    src: url('RedHatDisplay-Italic.woff2') format('woff2'),
+         url('RedHatDisplay-Italic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'rhd-Light-Italic';
+    src: url('RedHatDisplay-LightItalic.woff2') format('woff2'),
+         url('RedHatDisplay-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+} */
+
+
+
+
+
+
+
+/* Warnock Pro */
+
+
+@font-face {
+    font-family: 'warnock_proitalic';
+    src: url('warnockpro-it-webfont.woff2') format('woff2'),
+         url('warnockpro-it-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_prolight_display';
+    src: url('warnockpro-lightdisp-webfont.woff2') format('woff2'),
+         url('warnockpro-lightdisp-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_prolight_italic';
+    src: url('warnockpro-lightit-webfont.woff2') format('woff2'),
+         url('warnockpro-lightit-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_proLtItdisplay';
+    src: url('warnockpro-lightitdisp-webfont.woff2') format('woff2'),
+         url('warnockpro-lightitdisp-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_prolight_subhead';
+    src: url('warnockpro-lightsubh-webfont.woff2') format('woff2'),
+         url('warnockpro-lightsubh-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_proregular';
+    src: url('warnockpro-regular-webfont.woff2') format('woff2'),
+         url('warnockpro-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_prosemibold';
+    src: url('warnockpro-semibold-webfont.woff2') format('woff2'),
+         url('warnockpro-semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_prosemibold_caption';
+    src: url('warnockpro-semiboldcapt-webfont.woff2') format('woff2'),
+         url('warnockpro-semiboldcapt-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_prosemibold_italic';
+    src: url('warnockpro-semiboldit-webfont.woff2') format('woff2'),
+         url('warnockpro-semiboldit-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_proSBdItsubhead';
+    src: url('warnockpro-semibolditsubh-webfont.woff2') format('woff2'),
+         url('warnockpro-semibolditsubh-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_prosemibold_subhead';
+    src: url('warnockpro-semiboldsubh-webfont.woff2') format('woff2'),
+         url('warnockpro-semiboldsubh-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'warnock_prosubhead';
+    src: url('warnockpro-subh-webfont.woff2') format('woff2'),
+         url('warnockpro-subh-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
