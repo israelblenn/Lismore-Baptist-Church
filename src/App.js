@@ -32,7 +32,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 
 // Apollo client
 const client = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
+  uri: `${process.env.REACT_APP_STRAPI_URL}/graphql`,
   cache: new InMemoryCache(),
 })
 
