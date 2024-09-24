@@ -1,25 +1,24 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const sendGridMail = require('@sendgrid/mail');
-const path = require('path');
-const dotenv = require('dotenv');
+const express = require('express')
+const bodyParser = require('body-parser')
+const sendGridMail = require('@sendgrid/mail')
+const path = require('path')
+const dotenv = require('dotenv')
 
-dotenv.config();
+dotenv.config()
 
-const app = express();
-const port = process.env.PORT || 5000;
+const app = express()
+const port = process.env.PORT || 5000
 
-const cors = require('cors');
-app.use(cors());
+const cors = require('cors')
+app.use(cors())
 
-sendGridMail.setApiKey(process.env.SENDGRID_API_KEY);
+sendGridMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-// Existing contact form endpoint
 app.post('/api/contact', async (req, res) => {
-    const { name, email, message } = req.body;
+    const { name, email, message } = req.body
 
     const msg = {
         to: 'israelblenn@gmail.com',
@@ -29,46 +28,25 @@ app.post('/api/contact', async (req, res) => {
         Name: ${name}
         Email: ${email}
         Message: ${message}`,
-    };
+    }
 
     try {
-        await sendGridMail.send(msg);
-        return res.status(200).json({ success: true, message: 'Email sent successfully' });
+        await sendGridMail.send(msg)
+        return res.status(200).json({ success: true, message: 'Email sent successfully' })
     } catch (error) {
-        console.error('Error sending email:', error);
-        return res.status(500).json({ success: false, message: 'Failed to send email' });
+        console.error('Error sending email:', error)
+        return res.status(500).json({ success: false, message: 'Failed to send email' })
     }
-});
+})
 
-// Test route to send a test email - Make sure this is above the React catch-all route
-app.get('/test-email', async (req, res) => {
-    const msg = {
-        to: 'israelblenn@gmail.com',  // Change to your email or test email
-        from: 'lbccontactform@gmail.com',  // Must be a verified sender email in SendGrid
-        subject: 'Test email from Render',
-        text: 'This is a test email from your live production environment.',
-    };
-
-    try {
-        await sendGridMail.send(msg); // Attempt to send the test email
-        return res.status(200).json({ success: true, message: 'Test email sent successfully' });
-    } catch (error) {
-        console.error('Error sending test email:', error);
-        if (error.response) {
-            console.error('SendGrid Error Details:', error.response.body); // Log detailed SendGrid error info
-        }
-        return res.status(500).json({ success: false, message: 'Failed to send test email' });
-    }
-});
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'build')))
 
-// Catch-all route to serve index.html for client-side routing
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + '/build/index.html'));
-});
+    res.sendFile(path.join(__dirname + '/build/index.html'))
+})
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+    console.log(`Server is running on port ${port}`)
+})
