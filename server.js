@@ -40,22 +40,22 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
-// Add the new test route
+// Test email route - must be above the catch-all route
 app.get('/test-email', async (req, res) => {
     const msg = {
-        to: 'israelblenn@gmail.com', // Your email or another test email
-        from: 'lbccontactform@gmail.com', // Must be verified in SendGrid
+        to: 'israelblenn@gmail.com',
+        from: 'lbccontactform@gmail.com',
         subject: 'Test email from Render',
         text: 'This is a test email from your live production environment.',
     };
 
     try {
-        await sendGridMail.send(msg); // Attempt to send the test email
+        await sendGridMail.send(msg);
         return res.status(200).json({ success: true, message: 'Test email sent successfully' });
     } catch (error) {
         console.error('Error sending test email:', error);
         if (error.response) {
-            console.error('SendGrid Error Details:', error.response.body); // Log detailed SendGrid error info
+            console.error('SendGrid Error Details:', error.response.body);
         }
         return res.status(500).json({ success: false, message: 'Failed to send test email' });
     }
