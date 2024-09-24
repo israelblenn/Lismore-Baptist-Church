@@ -14,9 +14,9 @@ const ContactUs = () => {
     }
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
     
-        setSendState({ message: "send", image: send, backgroundSize: "100% 0%", pointerEvents: "none" })
+        setSendState({ message: "send", image: send, backgroundSize: "100% 0%", pointerEvents: "none" });
     
         try {
             const response = await fetch('/api/contact', {
@@ -25,24 +25,31 @@ const ContactUs = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
-            })
+            });
     
+            // Log the full response to see what's coming back
+            console.log('Response:', response);
+    
+            // Check if the response is ok before parsing
             if (response.ok) {
-                await response.json()
-                setFormData({ name: '', email: '', message: '' })
-                setSendState({ message: "sent", image: sent, backgroundSize: "100% 0%", pointerEvents: "none" })
+                const result = await response.json();  // Only parse JSON if the response is valid
+                console.log('Result:', result);
+                setFormData({ name: '', email: '', message: '' });
+                setSendState({ message: "sent", image: sent, backgroundSize: "100% 0%", pointerEvents: "none" });
             } else {
-                const result = await response.text()
-                console.error('Error: ', result)
-                alert('ERROR: ' + result)
-                setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" })
+                // Parse response as text and log it
+                const result = await response.text(); 
+                console.error('Error: ', result);
+                alert('ERROR: ' + result);
+                setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" });
             }
         } catch (error) {
-            console.error('Error:', error)
-            alert('An error occurred while sending the email.')
-            setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" })
+            console.error('Error:', error);
+            alert('An error occurred while sending the email.');
+            setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" });
         }
-    }
+    };
+    
     
 
     return (

@@ -18,7 +18,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.post('/api/contact', async (req, res) => {
-    const { name, email, message } = req.body
+    const { name, email, message } = req.body;
 
     const msg = {
         to: 'israelblenn@gmail.com',
@@ -28,16 +28,17 @@ app.post('/api/contact', async (req, res) => {
         Name: ${name}
         Email: ${email}
         Message: ${message}`,
-    }
+    };
 
     try {
-        await sendGridMail.send(msg)
-        return res.status(200).json({ success: true, message: 'Email sent successfully' })
+        await sendGridMail.send(msg);
+        return res.status(200).json({ success: true, message: 'Email sent successfully' });
     } catch (error) {
-        console.error('Error sending email:', error)
-        return res.status(500).json({ success: false, message: 'Failed to send email' })
+        console.error('Error sending email:', error);
+        return res.status(500).json({ success: false, message: 'Failed to send email' });  // Ensure JSON response in case of failure
     }
-})
+});
+
 
 
 // Serve static files from the React app
