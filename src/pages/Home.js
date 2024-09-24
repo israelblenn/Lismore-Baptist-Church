@@ -33,16 +33,16 @@ const GET_DATA = gql`
             }
         }
     }
-`;
+`
 
 const Home = () => {
     
-    const { loading, error, data } = useQuery(GET_DATA);
+    const { loading, error, data } = useQuery(GET_DATA)
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (loading) return <em className="loading-text">loading content...</em>
+    if (error) return <em className="loading-text">Error: {error.message}</em>
   
-    const networks = data.networks.data;
+    const networks = data.networks.data
 
     return (
         <div className="home">
@@ -238,7 +238,7 @@ const Home = () => {
                                         <p><i>{network.attributes.location}</i></p>
                                     </div>
                                 </div>
-                                );
+                                )
                             })}
                         </div>
                     </section>

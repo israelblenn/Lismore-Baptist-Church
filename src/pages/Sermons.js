@@ -168,10 +168,10 @@ const Sermons = () => {
         refetchSermons()
     }, [currentPage, sermonsPerPage, selectedSpeaker, refetchSermons])
 
-    if (sermonsLoading || speakersLoading || seriesLoading) return <p>Loading...</p>
-    if (sermonsError) return <p>Error: {sermonsError.message}</p>
-    if (speakersError) return <p>Error: {speakersError.message}</p>
-    if (seriesError) return <p>Error: {seriesError.message}</p>
+    if (sermonsLoading || speakersLoading || seriesLoading) return <em className="loading-text">loading content...</em>
+    if (sermonsError) return <em className="loading-text">Error: {sermonsError.message}</em>
+    if (speakersError) return <em className="loading-text">Error: {speakersError.message}</em>
+    if (seriesError) return <em className="loading-text">Error: {seriesError.message}</em>
 
     // Get unique speakers from speakersData
     const speakers = ['All Speakers', ...speakersData.speakers.data.map(speaker => speaker.attributes.name)]

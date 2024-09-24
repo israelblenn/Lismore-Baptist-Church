@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import header from "../assets/singing.webp";
-import send from "../assets/send.svg";
-import sent from "../assets/tick.svg";
+import React, { useState } from 'react'
+import header from "../assets/singing.webp"
+import send from "../assets/send.svg"
+import sent from "../assets/tick.svg"
 
 const ContactUs = () => {
-    const [sendState, setSendState] = useState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" });
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [sendState, setSendState] = useState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" })
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' })
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+    }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        setSendState({ message: "send", image: send, backgroundSize: "100% 0%", pointerEvents: "none" });
+        setSendState({ message: "send", image: send, backgroundSize: "100% 0%", pointerEvents: "none" })
 
         try {
             const response = await fetch('https://formspree.io/f/xvgpjlrr', {
@@ -27,23 +27,23 @@ const ContactUs = () => {
                     email: formData.email,
                     message: formData.message,
                 }),
-            });
+            })
 
             if (response.ok) {
-                setFormData({ name: '', email: '', message: '' });
-                setSendState({ message: "sent", image: sent, backgroundSize: "100% 0%", pointerEvents: "none" });
+                setFormData({ name: '', email: '', message: '' })
+                setSendState({ message: "sent", image: sent, backgroundSize: "100% 0%", pointerEvents: "none" })
             } else {
-                const result = await response.text();
-                console.error('Error: ', result);
-                alert('ERROR: ' + result);
-                setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" });
+                const result = await response.text()
+                console.error('Error: ', result)
+                alert('ERROR: ' + result)
+                setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" })
             }
         } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while sending the message.');
-            setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" });
+            console.error('Error:', error)
+            alert('An error occurred while sending the message.')
+            setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" })
         }
-    };
+    }
 
     return (
         <>
@@ -93,7 +93,7 @@ const ContactUs = () => {
                 </div>
             </section>
         </>
-    );
-};
+    )
+}
 
-export default ContactUs;
+export default ContactUs

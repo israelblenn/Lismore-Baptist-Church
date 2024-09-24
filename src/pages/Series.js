@@ -73,8 +73,8 @@ const Series = () => {
     variables: { id },
   })
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error.message}</p>
+  if (loading) return <em className="loading-text">loading content...</em>
+  if (error) return <em className="loading-text">Error: {error.message}</em>
 
   const series = data.series.data
 

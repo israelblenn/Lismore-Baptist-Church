@@ -1,7 +1,7 @@
-import { useQuery, gql } from '@apollo/client';
-import header from "../assets/header-ourTeam.webp";
+import { useQuery, gql } from '@apollo/client'
+import header from "../assets/header-ourTeam.webp"
 
-const StrapiURL = process.env.REACT_APP_STRAPI_URL;
+const StrapiURL = process.env.REACT_APP_STRAPI_URL
 
 const GET_TEAM_MEMBERS = gql`
   query {
@@ -22,15 +22,15 @@ const GET_TEAM_MEMBERS = gql`
       }
     }
   }
-`;
+`
 
 const OurTeam = () => {
-  const { loading, error, data } = useQuery(GET_TEAM_MEMBERS);
+  const { loading, error, data } = useQuery(GET_TEAM_MEMBERS)
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <em className="loading-text">loading content...</em>
+  if (error) return <em className="loading-text">Error: {error.message}</em>
 
-  const teamMembers = data.teamMembers.data;
+  const teamMembers = data.teamMembers.data
 
   return (
     <>
@@ -45,8 +45,8 @@ const OurTeam = () => {
       <div className="container-medium">
         <section className="profiles">
           {teamMembers.map((member, index) => {
-            const memberAttributes = member.attributes || {};
-            const pictureUrl = memberAttributes.picture?.data?.attributes?.url || '';
+            const memberAttributes = member.attributes || {}
+            const pictureUrl = memberAttributes.picture?.data?.attributes?.url || ''
 
             return (
               <div className="pastor-profile" key={index}>
@@ -62,12 +62,12 @@ const OurTeam = () => {
                   <p>{memberAttributes.biography || 'No biography available.'}</p>
                 </div>
               </div>
-            );
+            )
           })}
         </section>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default OurTeam;
+export default OurTeam
