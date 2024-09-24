@@ -1,56 +1,49 @@
-import React, { useState } from 'react'
-import header from "../assets/singing.webp"
-import send from "../assets/send.svg"
-import sent from "../assets/tick.svg"
+import React, { useState } from 'react';
+import header from "../assets/singing.webp";
+import send from "../assets/send.svg";
+import sent from "../assets/tick.svg";
 
 const ContactUs = () => {
-
-    const [sendState, setSendState] = useState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" })
-
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+    const [sendState, setSendState] = useState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" });
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-    }
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         setSendState({ message: "send", image: send, backgroundSize: "100% 0%", pointerEvents: "none" });
-    
+
         try {
-            const response = await fetch('/api/contact', {
+            const response = await fetch('https://formspree.io/f/xvgpjlrr', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message,
+                }),
             });
-    
-            // Log the full response to see what's coming back
-            console.log('Response:', response);
-    
-            // Check if the response is ok before parsing
+
             if (response.ok) {
-                const result = await response.json();  // Only parse JSON if the response is valid
-                console.log('Result:', result);
                 setFormData({ name: '', email: '', message: '' });
                 setSendState({ message: "sent", image: sent, backgroundSize: "100% 0%", pointerEvents: "none" });
             } else {
-                // Parse response as text and log it
-                const result = await response.text(); 
+                const result = await response.text();
                 console.error('Error: ', result);
                 alert('ERROR: ' + result);
                 setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" });
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred while sending the email.');
+            alert('An error occurred while sending the message.');
             setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" });
         }
     };
-    
-    
 
     return (
         <>
@@ -100,7 +93,7 @@ const ContactUs = () => {
                 </div>
             </section>
         </>
-    )
-}
+    );
+};
 
-export default ContactUs
+export default ContactUs;
