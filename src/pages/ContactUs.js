@@ -15,27 +15,35 @@ const ContactUs = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+    
         setSendState({ message: "send", image: send, backgroundSize: "100% 0%", pointerEvents: "none" })
-
-        const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-
-        const result = await response.json()
-
-        if (response.ok) {
-            setFormData({ name: '', email: '', message: '' })
-            setSendState({ message: "sent", image: sent, backgroundSize: "100% 0%", pointerEvents: "none" })
-        } else {
-            alert('ERROR: ' + result.message)
+    
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+    
+            if (response.ok) {
+                await response.json()
+                setFormData({ name: '', email: '', message: '' })
+                setSendState({ message: "sent", image: sent, backgroundSize: "100% 0%", pointerEvents: "none" })
+            } else {
+                const result = await response.text()
+                console.error('Error: ', result)
+                alert('ERROR: ' + result)
+                setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" })
+            }
+        } catch (error) {
+            console.error('Error:', error)
+            alert('An error occurred while sending the email.')
             setSendState({ message: "send", image: send, backgroundSize: "", pointerEvents: "" })
         }
     }
+    
 
     return (
         <>
