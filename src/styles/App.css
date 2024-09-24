@@ -28,13 +28,13 @@ body {
     background-color: #fff;
     margin: 0;
     font-size: 15px;
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
     line-height: 125%;
     object-fit: none;
 }
 
 h1 {
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
     font-size: 48px;
     font-weight: 600;
     line-height: normal;
@@ -43,7 +43,7 @@ h1 {
 }
 
 h2 {
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
     font-size: 36px;
     font-weight: 600;
     line-height: normal;
@@ -51,7 +51,7 @@ h2 {
 }
 
 h3 {
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: normal;
@@ -63,7 +63,7 @@ h4 {
     margin-bottom: 8px;
     font-size: 15px;
     font-weight: 400;
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
     margin: 2px 0 24px 0;
 }
 
@@ -85,7 +85,7 @@ p {
 em {
     font-size: 15px;
     font-weight: 600;
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
     font-style: normal;
 }
 
@@ -117,7 +117,7 @@ select {
     background-color: #F6F6F6;
     border: none;
     border-radius: 5px;
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
     font-weight: 600;
     font-size: 16px;
     padding: 0 4px 0 4px;

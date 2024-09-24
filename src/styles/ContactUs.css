@@ -40,7 +40,7 @@ form {
     margin-bottom: 8px;
     font-size: 15px;
     font-weight: 500;
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
 }
 
 .textinput {
@@ -52,7 +52,7 @@ form {
 
     font-size: 15px;
     font-weight: 400;
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
     padding: 8px;
 }
 
@@ -108,7 +108,7 @@ form {
 }
 
 .sendbtn p {
-    font-family: Red Hat Display, sans-serif;
+    font-family: red-hat-display, sans-serif;
     font-weight: 500;
     background: white;
     mix-blend-mode: difference;
