@@ -434,7 +434,7 @@ mark {
 
     .hero-content {
         width: auto;
-        height: 100vh;
+        height: 100svh;
         min-height: 840px;
         max-height: 944px;
         background-color: transparent;
