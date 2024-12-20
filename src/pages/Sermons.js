@@ -301,23 +301,36 @@ const FeaturedSeries = ({ seriesData }) => {
             <em className='featured-series'>FEATURED SERIES</em>
             <div className="featured-series-list">
                 {featuredSeries.map(series => {
-                    const latestSermon = [...series.attributes.sermons.data].sort((a, b) => new Date(b.attributes.date) - new Date(a.attributes.date))[0]
-                    const latestSermonDate = new Date(latestSermon.attributes.date)
-                    const isNew = (new Date() - latestSermonDate) / (1000 * 60 * 60 * 24) <= 7
+                    const coverUrl = series.attributes.cover?.data?.attributes?.url; // Null-safe chaining
+                    const latestSermon = [...(series.attributes.sermons?.data || [])]
+                        .sort((a, b) => new Date(b.attributes.date) - new Date(a.attributes.date))[0];
+                    
+                    if (!latestSermon) return null; // Skip if no sermons
+    
+                    const latestSermonDate = new Date(latestSermon.attributes.date);
+                    const isNew = (new Date() - latestSermonDate) / (1000 * 60 * 60 * 24) <= 7;
+    
                     return (
                         <Link to={`/series/${series.id}`} key={series.id} className="featured-series-item">
-                            <div className='background-filter' style={{ backgroundImage: `url(${StrapiURL}${series.attributes.cover.data.attributes.url})` }} />
+                            <div
+                                className='background-filter'
+                                style={{
+                                    backgroundImage: coverUrl ? `url(${StrapiURL}${coverUrl})` : undefined
+                                }}
+                            />
                             <div className='featured-series-date-wrapper'>
                                 <div className="featured-series-date">{latestSermonDate.toLocaleDateString('en-GB')}</div>
                                 {isNew && <div className="new-tag">NEW</div>}
                             </div>
-                            <div className="featured-series-title"><h3><strong>{series.attributes.title}</strong></h3></div>
+                            <div className="featured-series-title">
+                                <h3><strong>{series.attributes.title}</strong></h3>
+                            </div>
                         </Link>
-                    )
+                    );
                 })}
             </div>
         </section>
-    )
+    );
 }
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
