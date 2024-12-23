@@ -186,3 +186,11 @@ mark {
     }
 
 }
+
+@media only screen and (max-width: 960px) {
+
+    .container-medium {
+        padding: 0 20px 0 20px;
+    }
+
+}

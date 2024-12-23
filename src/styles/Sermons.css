@@ -291,4 +291,12 @@
     .sermonInfoRow {
         width: unset;
     }
+
+    .featured-series-item {
+        width: calc(100vw - 40px);
+    }
+
+    .background-filter {
+        width: calc(100vw - 40px);
+    }
 }

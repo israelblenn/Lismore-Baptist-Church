@@ -1,3 +1,5 @@
+
+
 .flex {
     display: flex;
 }
@@ -618,4 +620,20 @@ mark {
 
 
 
+}
+
+@media only screen and (max-width: 960px) {
+
+    .waw-img {
+        margin: 0 -20px 0 -20px;
+    }
+
+    .values {
+        gap: 20px;
+        margin: 0px 20px 0 20px;
+    }
+
+    .value-icons {
+        gap: 20px;
+    }
 }
