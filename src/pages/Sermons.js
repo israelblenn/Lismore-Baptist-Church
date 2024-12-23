@@ -31,13 +31,7 @@ const SERMONS = gql`
                             }
                         }
                     }
-                    recording {
-                        data {
-                            attributes {
-                                url
-                            }
-                        }
-                    }
+                    recording
                     guide {
                         data {
                             attributes {
@@ -56,6 +50,7 @@ const SERMONS = gql`
         }
     }
 `
+
 
 const SPEAKERS = gql`
     query GetSpeakers {
@@ -87,13 +82,7 @@ const SPEAKERS = gql`
                                         }
                                     }
                                 }
-                                recording {
-                                    data {
-                                        attributes {
-                                            url
-                                        }
-                                    }
-                                }
+                                recording
                                 guide {
                                     data {
                                         attributes {
@@ -155,11 +144,14 @@ const Sermons = () => {
 
     const { loading: sermonsLoading, error: sermonsError, refetch: refetchSermons } = useQuery(SERMONS, {
         variables: {
-            limit: sermonsPerPage === 'All' ? 100 : sermonsPerPage,
-            start: (currentPage - 1) * (sermonsPerPage === 'All' ? 100 : sermonsPerPage),
+            limit: sermonsPerPage === 'All' ? 1000 : sermonsPerPage,
+            start: (currentPage - 1) * (sermonsPerPage === 'All' ? 1000 : sermonsPerPage),
         },
         notifyOnNetworkStatusChange: true,
     })
+
+    console.log('GraphQL Response:', sermonsLoading)
+
 
     const { loading: speakersLoading, error: speakersError, data: speakersData } = useQuery(SPEAKERS)
     const { loading: seriesLoading, error: seriesError, data: seriesData } = useQuery(SERIES)
@@ -188,10 +180,13 @@ const Sermons = () => {
                             name: speaker.attributes.name
                         }
                     }
-                }
+                },
             }
         }))
     )
+
+    
+    
 
     // Filter sermons by selected speaker
     const filteredSermons = selectedSpeaker === 'All Speakers'
@@ -230,6 +225,9 @@ const Sermons = () => {
         setSelectedSpeaker(event.target.value)
         setCurrentPage(1) // Reset to the first page
     }
+
+    console.log(currentSermons);
+    
 
     return (
         <>
@@ -278,7 +276,7 @@ const FeaturedSeries = ({ seriesData }) => {
 
     let seriesCount = 3
 
-    if (window.innerWidth < 1260) {
+    if (window.innerWidth < 960) {
         seriesCount = 1
     }
 

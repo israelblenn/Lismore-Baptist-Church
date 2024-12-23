@@ -150,7 +150,7 @@ const Player = ({ sermon, isExpanded, onExpand, isPlaying, onTogglePlay }) => {
     }
 
     const openRecording = () => {
-        window.open(`${StrapiURL}${sermon.attributes.recording.data.attributes.url}`)
+        window.open(sermon.attributes.recording)
     }
 
     const openGuide = (e) => {
@@ -181,6 +181,21 @@ const Player = ({ sermon, isExpanded, onExpand, isPlaying, onTogglePlay }) => {
         }, [])
     }
 
+
+    const convertDropboxLink = (url) => {
+        try {
+            const urlObj = new URL(url);
+            if (urlObj.hostname === 'www.dropbox.com' && urlObj.searchParams.get('dl') === '0') {
+                urlObj.searchParams.set('dl', '1')
+            }
+            return urlObj.toString();
+        } catch (error) {
+            console.error('Invalid Dropbox URL:', error)
+            return url
+        }
+    };    
+    
+
     return (
         <div className="sermon" onClick={handleContainerClick} style={{ height: isExpanded ? "128px" : "64px" }}>
             <div className="sermonButtons">
@@ -203,7 +218,7 @@ const Player = ({ sermon, isExpanded, onExpand, isPlaying, onTogglePlay }) => {
                 </div>
                 <div className="scrubber">
                     <div id="audio-player-container">
-                        <audio ref={audioElem} onTimeUpdate={onTimeUpdate} onWaiting={onWaiting} onEnded={onEnded} src={`${StrapiURL}${sermon.attributes.recording.data.attributes.url}`} preload="metadata"></audio>
+                        <audio ref={audioElem} onTimeUpdate={onTimeUpdate} onWaiting={onWaiting} onEnded={onEnded} src={convertDropboxLink(sermon.attributes.recording)} preload="metadata"></audio>
                         <small id="current-time" className="time">{sToTime(currentTime)}</small>
                         <input type="range" id="seek-slider" min="0" max="100" step="0.001" value={progress} onChange={alterProgress} style={{ "--buffered-width": `${buffer}%`, "--seek-before-width": `${progress}%`, padding: 0 }} />
                         <div className="bufferingWrapper" style={{ "--buffering-visibility": bufferingVisibility, "--seek-after-width": `${100 - progress - (1 - progress / 100)}%` }}>

@@ -254,14 +254,6 @@
         width: auto;
     }
 
-    .sermonAttributes {
-        display: none;
-    }
-
-    .date {
-        display: none;
-    }
-
     .featured-series-item {
         width: calc(100vw - 80px);
     }
@@ -279,4 +271,24 @@
         margin-top: 72px;
     }
 
+    .featured-series-list{
+        gap: 16px;
+    }
+
+}
+
+@media only screen and (max-width: 960px) {
+    .sermonAttributes {
+        display: none;
+    }
+
+    .sermonInfo {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .sermonInfoRow {
+        width: unset;
+    }
 }

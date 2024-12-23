@@ -43,13 +43,7 @@ const GET_SERIES = gql`
                     }
                   }
                 }
-                recording {
-                  data {
-                    attributes {
-                      url
-                    }
-                  }
-                }
+                recording
                 guide {
                   data {
                     attributes {
