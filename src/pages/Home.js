@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { useQuery, gql } from '@apollo/client';
 import ReactMarkdown from 'react-markdown';
 
@@ -32,17 +31,60 @@ const GET_DATA = gql`
                 }
             }
         }
+        programs {
+            data {
+                attributes {
+                    title
+                    description
+                    column
+                }
+            }
+        }
     }
 `
 
 const Home = () => {
-    
+     
     const { loading, error, data } = useQuery(GET_DATA)
 
     if (loading) return <em className="loading-text">loading content...</em>
     if (error) return <em className="loading-text">Error: {error.message}</em>
   
     const networks = data.networks.data
+    const programs = data.programs.data
+
+    const column1Programs = programs.filter((program) => program.attributes.column === "COLUMN_1")
+    const column2Programs = programs.filter((program) => program.attributes.column === "COLUMN_2")
+    
+    const renderRichText = (nodes) => {
+        return nodes.map((node, index) => {
+            switch (node.type) {
+                case "paragraph":
+                    return (
+                        <p key={index}>
+                            {renderRichText(node.children)}
+                        </p>
+                    );
+                case "text":
+                    if (node.text.includes("<Link") || node.text.includes("<a")) {
+                        const html = node.text.replace(
+                            /<Link to="(.*?)">(.*?)<\/Link>/g,
+                            `<a href="$1">$2</a>`
+                        );
+                        return (
+                            <span
+                                key={index}
+                                dangerouslySetInnerHTML={{ __html: html }}
+                            />
+                        );
+                    }
+                    return node.text;
+                default:
+                    return null;
+            }
+        });
+    };
+
 
     return (
         <div className="home">
@@ -66,49 +108,29 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* KID'S CHURCH / GROWTH GROUPS */}
+            {/* PROGRAMS */}
             <div className="container-medium">
                 <section className="programs">
-                    <div className="program growthGroups">
-                        <h2>Growth Groups</h2>
-                        <p className="paragraphgap">
-                            While Sundays are a big part of our life together at Lismore Baptist Church, it’s
-                            our Growth Groups that are at the heart of taking things deeper. In our Growth
-                            Groups we often study the same passage that is preached the Sunday. This
-                            gives everyone an opportunity to engage and ask questions in an informal
-                            setting.
-                            <br /><br />
-                            Growth Groups also provide a great opportunity to get to know each other
-                            better, pray for each other, and build lasting spiritual friendships. Growth
-                            Groups meet weekly, on different days and nights of the week, some at the
-                            church building & others in homes. There are groups for younger people, other
-                            groups for older folk. Some groups eat dinner together and go late, others aim
-                            to finish early. With numerous groups, there’s an option to suit everyone.
-                            <br /><br />
-                            If you would like more information about Growth Groups please <Link to="/ContactUs">Contact Us</Link>
-                        </p>
+                    <div className="program-column">
+                        {column1Programs.map((program, index) => (
+                            <div key={index} className="program">
+                                <h2>{program.attributes.title}</h2>
+                                <div className="paragraphgap">
+                                    {renderRichText(program.attributes.description)}
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     <div className="programs-breaker"></div>
-                    <div className="program">
-                        <h2>Kid&rsquo;s Church</h2>
-                        <p className="paragraphgap">
-                            Our kids are encouraged to join in the first bracket of worship songs of the
-                            gathering and will then be invited to head out to the hall with the Kids Church
-                            leaders. The program will then run until the end of the gathering when parents
-                            and carers sign the kids out and everyone can enjoy morning tea together. This
-                            fun and exciting program runs during school term and is facilitated by a team of
-                            wonderful trained leaders.
-                            <br /><br />
-                            If you would like more information about Kids Church please <Link to="/ContactUs">Contact Us</Link>
-                        </p>
-                    </div>
-                    <div className="program alpha">
-                        <h2>Alpha</h2>
-                        <p className="paragraphgap">
-                            Alpha is a series of interactive sessions that create a safe and honest space, where
-                            people can explore life, faith and meaning. We run these sessions twice a year. If
-                            you would like more information about Alpha please <Link to="/ContactUs">Contact Us</Link> or visit <a href="https://www.alpha.org.au/">alpha.org.au</a>
-                        </p>
+                    <div className="program-column">
+                        {column2Programs.map((program, index) => (
+                            <div key={index} className="program">
+                                <h2>{program.attributes.title}</h2>
+                                <div className="paragraphgap">
+                                    {renderRichText(program.attributes.description)}
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </section>
             </div>
@@ -120,7 +142,7 @@ const Home = () => {
                         <div className="waw-edge"></div>
                         <div className="container-medium flex">
                             <div className="waw-header">
-                                <h1 className="whoarewe">Who Are <h1 className="wemask">We?</h1></h1>
+                                <h1 className="whoarewe">Who Are <span className="wemask">We?</span></h1>
                             </div>
                             <div className="corner2"></div>
                         </div>
@@ -230,9 +252,9 @@ const Home = () => {
                                         <iframe
                                             className="map"
                                             src={network.attributes.map}
-                                            allowfullscreen=""
+                                            allowFullScreen=""
                                             loading="lazy"
-                                            referrerpolicy="no-referrer-when-downgrade"
+                                            referrerPolicy="no-referrer-when-downgrade"
                                             title={network.attributes.mapLocationMetadata}
                                         />
                                         <p><i>{network.attributes.location}</i></p>

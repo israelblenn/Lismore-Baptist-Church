@@ -143,7 +143,7 @@ nav {
         z-index: 4;
         right: 0;
         overflow: hidden;
-        height: 100vh;
+        height: 100svh;
     }
 
     :root {
@@ -234,7 +234,7 @@ nav {
         backdrop-filter: blur(10px);
         color: var(--foreground);
         width: 100vw;
-        min-height: 100vh;
+        min-height: 100svh;
     }
 
     .hamburger:has(input:checked)+.navSidebar {
@@ -249,7 +249,7 @@ nav {
 
     .hamburger-tray {
         width: 100%;
-        height: 100vh;
+        height: 100svh;
         position: fixed;
         z-index: 3;
         left: 0;
@@ -274,13 +274,13 @@ nav {
         backdrop-filter: blur(10px);
         color: var(--foreground);
         width: 100vw;
-        min-height: 100vh;
+        min-height: 100vsh;
         pointer-events: none;
     }
 
     .hamburger-tray {
         width: 100%;
-        height: 100vh;
+        height: 100svh;
         position: fixed;
         z-index: 3;
         left: 0;

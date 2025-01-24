@@ -74,8 +74,13 @@ mark {
     margin-bottom: 128px;
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
-    grid-row-gap: 32px;
     grid-column-gap: 16px;
+}
+
+.program-column {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
 }
 
 .programs-breaker {
@@ -87,14 +92,6 @@ mark {
 .heading-3 {
     font-size: 36px;
     font-weight: 600;
-}
-
-.alpha {
-    grid-column-start: 3;
-}
-
-.growthGroups {
-    grid-row: span 2;
 }
 
 .waw-edge {
@@ -338,6 +335,10 @@ mark {
     margin-top: 16px;
 }
 
+.paragraphgap p{
+    margin-top: 16px;
+}
+
 .networks {
     justify-content: space-between;
     padding-bottom: 40px;
@@ -514,6 +515,10 @@ mark {
         display: flex;
         flex-direction: column;
         grid-row-gap: 72px;
+    }
+
+    .program-column {
+        gap: 72px;
     }
 
     .programs-breaker {
