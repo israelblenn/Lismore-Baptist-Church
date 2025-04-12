@@ -154,7 +154,9 @@
     text-decoration: underline;
 }
 
-
+.mobile-sfp{
+    display: none;
+}
 
 
 @media only screen and (max-width: 1260px) {
@@ -179,7 +181,6 @@
 
     .leftcolumn-1 {
         display: none;
-
     }
 
     .rightcolumn {
@@ -205,8 +206,12 @@
         margin: 16px 0 0 0;
     }
 
-
     .copyright {
         display: none;
+    }
+
+    .mobile-sfp{
+        display: block;
+        margin: 16px 0 0 0;
     }
 }

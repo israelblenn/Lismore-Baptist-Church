@@ -51,6 +51,10 @@ const Footer = () => {
                                     <a href="mailto:office@lismorebaptist.org.au" className="sociallink">office@lismorebaptist.org.au</a>
                                 </div>
                             </div>
+                            <a href={scp} className="footerlink mobile-sfp">
+                                Safe Churches Policy
+                                <img src={download} loading="lazy" alt="" className="downloadicon" />
+                            </a>
                             <div className="column-2">
                                 <h1>Following Jesus, loving others, and making disciples.</h1>
                             </div>

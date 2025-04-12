@@ -194,7 +194,7 @@
               console.error('Invalid Dropbox URL:', error);
               return url;
             }
-          };  
+        };
         
 
         return (
