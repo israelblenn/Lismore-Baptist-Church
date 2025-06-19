@@ -31,7 +31,7 @@ const GET_DATA = gql`
                 }
             }
         }
-        programs {
+        programs(sort: "publishedAt:desc") {
             data {
                 attributes {
                     title
