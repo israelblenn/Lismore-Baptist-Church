@@ -8,6 +8,10 @@
     margin-top: 160px;
 }
 
+.partner.reversed {
+  flex-direction: row-reverse;
+}
+
 .partner-info {
     width: 544px;
     display: flex;
@@ -61,6 +65,12 @@
     display: none;
 }
 
+.partnership-image {
+    width: 544px;
+    height: 296px;
+    object-fit: cover;
+}
+
 
 @media only screen and (max-width: 1260px) {
 
@@ -70,6 +80,9 @@
 
     .partner {
         margin-top: 72px;
+        flex-direction: column;
+    }
+    .partner.reversed {
         flex-direction: column;
     }
 
@@ -92,6 +105,12 @@
 
     .break {
         display: none;
+    }
+
+    .partnership-image {
+        width: unset;
+        height: unset;
+        object-fit: unset;
     }
 
 }

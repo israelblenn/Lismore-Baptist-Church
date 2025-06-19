@@ -18,6 +18,11 @@ nav {
     height: 48px;
 }
 
+.hopefield {
+        height: 40px;
+
+}
+
 .navLinks {
     width: 544px;
     justify-content: space-between;

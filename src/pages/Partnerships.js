@@ -1,12 +1,76 @@
 import header from "../assets/header-partnerships.webp"
-import BAoNSWaACT from "../assets/BAoNSWaACT.webp"
-import BMA from "../assets/BMA.webp"
-import { Link } from 'react-router-dom'
+import { useQuery, gql } from '@apollo/client'
+
+const StrapiURL = process.env.REACT_APP_STRAPI_URL
+
+const GET_PARTNERSHIPS = gql`
+    query {
+        partnerships(sort: "publishedAt:desc") {
+        data {
+            id
+            attributes {
+                Title
+                Description 
+                Website    
+                Image {    
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
+            }
+        }
+        }
+    }
+`
 
 const Partnerships = () => {
+    const { loading, error, data } = useQuery(GET_PARTNERSHIPS)
+
+    if (loading) return <em className="loading-text">loading content...</em>
+    if (error) {
+        console.error('Full error details:', error);
+        return <em className="loading-text">Error: {error.message}</em>;
+    }
+
+    const partnerships = data.partnerships.data
+    
+    console.log(partnerships);
+    
+
     const openLink = (url) => {
         window.open(url, '_blank', 'noopener,noreferrer')
     }
+    
+    const renderRichText = (nodes) => {
+        return nodes.map((node, index) => {
+            switch (node.type) {
+                case "paragraph":
+                    return (
+                        <p key={index}>
+                            {renderRichText(node.children)}
+                        </p>
+                    );
+                case "text":
+                    if (node.text.includes("<Link") || node.text.includes("<a")) {
+                        const html = node.text.replace(
+                            /<Link to="(.*?)">(.*?)<\/Link>/g,
+                            `<a href="$1">$2</a>`
+                        );
+                        return (
+                            <span
+                                key={index}
+                                dangerouslySetInnerHTML={{ __html: html }}
+                            />
+                        );
+                    }
+                    return node.text;
+                default:
+                    return null;
+            }
+        });
+    };
 
     return (
         <>
@@ -19,43 +83,25 @@ const Partnerships = () => {
             </section>
 
             <section className="partnerships-wrapper container-medium">
+                {partnerships.map((partnership, index) => {
+                    const partnershipAttributes = partnership.attributes || {}
+                    const imageUrl = partnershipAttributes.Image?.data?.attributes?.url || ''
 
-                <div className="partner">
-                    <div className="partner-info">
-                        <div>
-                            <h2>Baptist Association of NSW <br className="break" />and ACT</h2>
-                            <p>
-                                Lismore Baptist Church and its ministries are members of the Baptist Association of NSW and ACT,
-                                which is made up of over 350 churches and ministries. We are supported by, yet also contribute to
-                                this dynamic and diverse associations of churches across our state. For more information, visit{'\u00A0'}
-                                <a href="https://nswactbaptists.org.au/" target="_blank" rel="noopener noreferrer">nswactbaptists.org.au</a>
-                            </p>
+                    return (
+                        <div className={`partner ${index % 2 === 1 ? 'reversed' : ''}`} key={index}>
+                            <div className="partner-info">
+                                <div>
+                                    <h2>{partnershipAttributes.Title || 'Unnamed'}</h2>
+                                    <p>{renderRichText(partnershipAttributes.Description || 'Unnamed')}</p>
+                                </div>
+                                <button className="visit-button" onClick={() => openLink(`${partnershipAttributes.Website}`)}>
+                                    <p>Visit Website</p>
+                                </button>
+                            </div>
+                            <img loading="lazy" className="partnership-image" src={`${StrapiURL}${imageUrl}`} alt={`Pastor ${partnershipAttributes.Title || 'Unknown'}`} />
                         </div>
-                        <button className="visit-button" onClick={() => openLink('https://nswactbaptists.org.au/')}>
-                            <p>Visit Website</p>
-                        </button>
-                    </div>
-                    <img loading="lazy" src={BAoNSWaACT} alt="Church members laying hands on man" />
-                </div>
-
-                <div className="partner">
-                    <img loading="lazy" src={BMA} className="BMA-Before" alt="Kalkarindji" />
-                    <div className="partner-info">
-                        <div>
-                            <h2>Baptist Mission Australia</h2>
-                            <p>
-                                We are partners with Baptist Mission Australia through a short term mission project in Kalkarindji in
-                                the Northern Territory. For more information, visit <a href="https://www.baptistmissionaustralia.org/" target="_blank" rel="noopener noreferrer">baptistmissionaustralia.org</a>
-                                {'\u00A0'}or <Link to="/ContactUs">contact us</Link>.
-                            </p>
-                        </div>
-                        <button className="visit-button" onClick={() => openLink('https://www.baptistmissionaustralia.org/')}>
-                            <p>Visit Website</p>
-                        </button>
-                    </div>
-                    <img loading="lazy" src={BMA} className="BMA-After" alt="Kalkarindji" />
-                </div>
-
+                    )
+                })}
             </section>
         </>
     )

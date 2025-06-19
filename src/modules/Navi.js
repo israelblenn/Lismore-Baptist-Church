@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import logo from "../assets/logo.webp"
+import hopefield from "../assets/Hopefield_Lismore_RGB.png"
 import { Link, NavLink } from 'react-router-dom'
 
-const StrapiURL = process.env.REACT_APP_STRAPI_URL
+// const StrapiURL = process.env.REACT_APP_STRAPI_URL
 
 const Navbar = () => {
 
-    const handleLoginClick = () => {
-        window.location.href = StrapiURL + '/admin'
-    }
+    // const handleLoginClick = () => {
+    //     window.location.href = StrapiURL + '/admin'
+    // }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -78,8 +79,9 @@ const Navbar = () => {
                     <li><NavLink id="sermons" to="Sermons" className="navLink" data-text="Sermons">Sermons</NavLink></li>
                     <li><NavLink id="partnerships" to="Partnerships" className="navLink" data-text="Partnerships">Partnerships</NavLink></li>
                     <li><NavLink id="contact-us" to="ContactUs" className="navLink" data-text="Contact Us">Contact Us</NavLink></li>
-                    <div className="navDivider"></div>
-                    <li className="login" onClick={handleLoginClick}>Login</li>
+                    {/* <div className="navDivider"></div> */}
+                    <li><NavLink id="partnerships" to="Partnerships" className="navLink"><img src={hopefield} alt="hopefield" className="hopefield" /></NavLink></li>
+                    {/* <li className="login" onClick={handleLoginClick}>Login</li> */}
                 </ul>
             </nav>
             <div className='mobile-navigation'>
