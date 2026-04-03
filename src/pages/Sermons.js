@@ -91,6 +91,15 @@ const SERIES = gql`
     }
 `
 
+/** Latest sermon date in a series — used to order “most recent series” first. */
+const getSeriesLatestDate = (series) => {
+    const sermons = series.attributes?.sermons?.data ?? []
+    if (sermons.length === 0) return new Date(0)
+    return new Date(
+        Math.max(...sermons.map((s) => new Date(s.attributes.date).getTime()))
+    )
+}
+
 const Sermons = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [sermonsPerPage, setSermonsPerPage] = useState(20)
@@ -236,11 +245,13 @@ const Sermons = () => {
                     {seriesLoading ? (
                         <SeriesListSkeleton />
                     ) : (
-                        seriesList.map(series => (
-                            <Link key={series.id} to={`/series/${series.id}`} className="series-item">
-                                {series.attributes.title}
-                            </Link>
-                        ))
+                        [...seriesList]
+                            .sort((a, b) => getSeriesLatestDate(b) - getSeriesLatestDate(a))
+                            .map(series => (
+                                <Link key={series.id} to={`/series/${series.id}`} className="series-item">
+                                    {series.attributes.title}
+                                </Link>
+                            ))
                     )}
                 </div>
             </section>
@@ -313,11 +324,7 @@ const FeaturedSeries = ({ seriesData, seriesLoading }) => {
 
     const sortedSeries = seriesData
         .filter(series => series.attributes.sermons.data.length > 0)
-        .sort((a, b) => {
-            const dateA = new Date(a.attributes.sermons.data[0].attributes.date)
-            const dateB = new Date(b.attributes.sermons.data[0].attributes.date)
-            return dateB - dateA
-        })
+        .sort((a, b) => getSeriesLatestDate(b) - getSeriesLatestDate(a))
 
     const featuredSeries = sortedSeries.slice(0, seriesCount)
 
