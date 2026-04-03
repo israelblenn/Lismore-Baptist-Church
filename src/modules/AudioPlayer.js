@@ -10,11 +10,15 @@
     const Modal = ({ show, onClose, guides }) => {
         if (!show) return null
 
+        const handleKeyDown = (e) => {
+            if (e.key === 'Escape') onClose()
+        }
+
         return (
-            <div className="modal-overlay">
+            <div className="modal-overlay" onKeyDown={handleKeyDown}>
                 <div className="overlay" onClick={onClose}></div>
-                <div className="modal">
-                    <h2>Files</h2>
+                <div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                    <h2 id="modal-title">Files</h2>
                     <ul>
                         {guides.map((guide, index) => (
                             <li key={index}>
@@ -40,6 +44,7 @@
         const [isNew, setIsNew] = useState(false)
         const [showModal, setShowModal] = useState(false)
         const audioElem = useRef()
+        const waitingTimerRef = useRef(null)
 
         const sermonDate = useMemo(() => new Date(sermon.attributes.date), [sermon.attributes.date])
         const formattedDate = sermonDate.toLocaleDateString('en-GB')
@@ -76,6 +81,24 @@
             onTogglePlay(null)
         }, [onTogglePlay])
 
+        const onWaiting = useCallback(() => {
+            setBufferingVisibility("visible")
+            const startTime = Date.now()
+
+            const checkFlag = () => {
+                if (audioElem.current && audioElem.current.readyState > audioElem.current.HAVE_CURRENT_DATA) {
+                    setBufferingVisibility("hidden")
+                } else if (Date.now() > startTime + 120000) {
+                    console.log(TIMEOUT_ERROR)
+                    alert(TIMEOUT_ERROR)
+                    setBufferingVisibility("hidden")
+                } else {
+                    waitingTimerRef.current = window.setTimeout(checkFlag, 100)
+                }
+            }
+            checkFlag()
+        }, [])
+
         useEffect(() => {
             const audioElement = audioElem.current
             audioElement.addEventListener("timeupdate", onTimeUpdate)
@@ -86,8 +109,9 @@
                 audioElement.removeEventListener("timeupdate", onTimeUpdate)
                 audioElement.removeEventListener("waiting", onWaiting)
                 audioElement.removeEventListener("ended", onEnded)
+                clearTimeout(waitingTimerRef.current)
             }
-        }, [onEnded, onTimeUpdate])
+        }, [onEnded, onTimeUpdate, onWaiting])
 
         useEffect(() => {
             setIcon(isPlaying ? pauseIcon : playIcon)
@@ -114,24 +138,6 @@
             setProgress(newProgress)
             const newCurrentTime = (newProgress / 100) * audioElem.current.duration
             audioElem.current.currentTime = newCurrentTime
-        }
-
-        const onWaiting = () => {
-            setBufferingVisibility("visible")
-            const startTime = Date.now()
-
-            const checkFlag = () => {
-                if (audioElem.current && audioElem.current.readyState > audioElem.current.HAVE_CURRENT_DATA) {
-                    setBufferingVisibility("hidden")
-                } else if (Date.now() > startTime + 120000) {
-                    console.log(TIMEOUT_ERROR)
-                    alert(TIMEOUT_ERROR)
-                    setBufferingVisibility("hidden")
-                } else {
-                    window.setTimeout(checkFlag, 100)
-                }
-            }
-            checkFlag()
         }
 
         const sToTime = (t) => {
@@ -200,11 +206,11 @@
         return (
             <div className="sermon" onClick={handleContainerClick} style={{ height: isExpanded ? "128px" : "64px" }}>
                 <div className="sermonButtons">
-                    <button id="play-icon" onClick={togglePlay} style={{ backgroundImage: `url(${icon})` }}>
+                    <button id="play-icon" onClick={togglePlay} style={{ backgroundImage: `url(${icon})` }} aria-label={isPlaying ? "Pause" : "Play"}>
                         <div className="play-icon-hover"></div>
                     </button>
-                    <button className="sermonBtn downloadSermon" onClick={openRecording} />
-                    {sermon.attributes.guide.data.length > 0 && (<button className="sermonBtn viewGuide" onClick={openGuide} />)}
+                    <button className="sermonBtn downloadSermon" onClick={openRecording} aria-label="Download sermon" />
+                    {sermon.attributes.guide.data.length > 0 && (<button className="sermonBtn viewGuide" onClick={openGuide} aria-label="View study guide" />)}
                 </div>
                 <div className="sermonMain">
                     <div className="sermonInfo">
@@ -222,9 +228,6 @@
                             <audio 
                                 ref={audioElem} 
                                 crossOrigin="anonymous"
-                                onTimeUpdate={onTimeUpdate} 
-                                onWaiting={onWaiting} 
-                                onEnded={onEnded} 
                                 src={convertDropboxLink(sermon.attributes.recording)} 
                                 preload="metadata"
                             />                            

@@ -50,10 +50,8 @@
 }
 
 .visit-button p {
-    font-family: red-hat-display, sans-serif;
+    font-family: var(--font-heading);
     font-weight: 600;
-    mix-blend-mode: difference;
-
     mix-blend-mode: difference;
     background: white;
     background-clip: text;

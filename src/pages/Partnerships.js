@@ -128,7 +128,7 @@ const Partnerships = () => {
                                 <div className="partner-info">
                                     <div>
                                         <h2>{partnershipAttributes.Title || 'Unnamed'}</h2>
-                                        <p>{renderRichText(partnershipAttributes.Description || 'Unnamed')}</p>
+                                        <p>{renderRichText(partnershipAttributes.Description || [])}</p>
                                     </div>
                                     <button type="button" className="visit-button" onClick={() => openLink(`${partnershipAttributes.Website}`)}>
                                         <p>Visit Website</p>

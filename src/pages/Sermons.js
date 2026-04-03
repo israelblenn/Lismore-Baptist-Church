@@ -1,5 +1,5 @@
 import { useQuery, gql } from '@apollo/client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from "react-router-dom"
 import AudioPlayer from '../modules/AudioPlayer'
 import SermonsHeader from '../modules/SermonsHeader'
@@ -196,6 +196,7 @@ const Sermons = () => {
                             onChange={handleSpeakerChange}
                             disabled={speakersLoading}
                             aria-busy={speakersLoading}
+                            aria-label="Filter by speaker"
                         >
                             {speakersLoading ? (
                                 <option value="All Speakers">Loading speakers…</option>
@@ -209,6 +210,7 @@ const Sermons = () => {
                             value={sermonsPerPage}
                             onChange={handleSermonsPerPageChange}
                             disabled={speakersLoading}
+                            aria-label="Sermons per page"
                         >
                             {[10, 20, 50, 80, 'All'].map(option => (
                                 <option key={option} value={option}>{option}</option>
@@ -235,9 +237,9 @@ const Sermons = () => {
                         <SeriesListSkeleton />
                     ) : (
                         seriesList.map(series => (
-                            <a key={series.id} href={`/series/${series.id}`} className="series-item">
+                            <Link key={series.id} to={`/series/${series.id}`} className="series-item">
                                 {series.attributes.title}
-                            </a>
+                            </Link>
                         ))
                     )}
                 </div>
@@ -278,13 +280,21 @@ const FeaturedSeriesSkeletonCards = () => (
     </>
 )
 
+const useSeriesCount = () => {
+    const getCount = () => (typeof window !== 'undefined' && window.innerWidth < 960) ? 1 : 3
+    const [count, setCount] = useState(getCount)
+
+    useEffect(() => {
+        const handleResize = () => setCount(getCount())
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    return count
+}
+
 const FeaturedSeries = ({ seriesData, seriesLoading }) => {
-
-    let seriesCount = 3
-
-    if (typeof window !== 'undefined' && window.innerWidth < 960) {
-        seriesCount = 1
-    }
+    const seriesCount = useSeriesCount()
 
     if (seriesLoading) {
         return (

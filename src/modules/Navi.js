@@ -3,19 +3,14 @@ import logo from "../assets/logo.webp"
 import hopefield from "../assets/Hopefield_Lismore_RGB.png"
 import { Link, NavLink } from 'react-router-dom'
 
-// const StrapiURL = process.env.REACT_APP_STRAPI_URL
-
 const Navbar = () => {
-
-    // const handleLoginClick = () => {
-    //     window.location.href = StrapiURL + '/admin'
-    // }
 
     useEffect(() => {
         const handleScroll = () => {
             const heroSection = document.querySelector('.hero')
             const headerSection = document.querySelector('.header')
             const hamburger = document.querySelector('.hamburger')
+            if (!hamburger) return
 
             const isHeroVisible = heroSection && heroSection.getBoundingClientRect().bottom > 0
             const isHeaderVisible = headerSection && headerSection.getBoundingClientRect().bottom > 0
@@ -32,6 +27,7 @@ const Navbar = () => {
             const menuCheckbox = document.querySelector('.hamburger input')
             const navSidebar = document.querySelector('.navSidebar')
             const hamburgerMenu = document.querySelector('.hamburger-menu')
+            if (!tray || !menuCheckbox || !navSidebar || !hamburgerMenu) return
 
             if (menuCheckbox.checked) {
                 tray.style.opacity = '1'
@@ -46,12 +42,13 @@ const Navbar = () => {
             }
         }
 
+        const checkbox = document.querySelector('.hamburger input')
         window.addEventListener('scroll', handleScroll)
-        document.querySelector('.hamburger input').addEventListener('change', handleHamburgerChange)
+        if (checkbox) checkbox.addEventListener('change', handleHamburgerChange)
 
         return () => {
             window.removeEventListener('scroll', handleScroll)
-            document.querySelector('.hamburger input').removeEventListener('change', handleHamburgerChange)
+            if (checkbox) checkbox.removeEventListener('change', handleHamburgerChange)
         }
     }, [])
 
@@ -79,16 +76,14 @@ const Navbar = () => {
                     <li><NavLink id="sermons" to="Sermons" className="navLink" data-text="Sermons">Sermons</NavLink></li>
                     <li><NavLink id="partnerships" to="Partnerships" className="navLink" data-text="Partnerships">Partnerships</NavLink></li>
                     <li><NavLink id="contact-us" to="ContactUs" className="navLink" data-text="Contact Us">Contact Us</NavLink></li>
-                    {/* <div className="navDivider"></div> */}
-                    <li><NavLink id="partnerships" to="Partnerships" className="navLink"><img src={hopefield} alt="hopefield" className="hopefield" /></NavLink></li>
-                    {/* <li className="login" onClick={handleLoginClick}>Login</li> */}
+                    <li><NavLink id="hopefield" to="Partnerships" className="navLink"><img src={hopefield} alt="hopefield" className="hopefield" /></NavLink></li>
                 </ul>
             </nav>
             <div className='mobile-navigation'>
                 <div className="hamburger-tray"></div>
                 <nav className="hamburger-menu">
                     <label className="hamburger">
-                        <input type="checkbox" />
+                        <input type="checkbox" aria-label="Toggle navigation menu" />
                     </label>
                     <aside className="navSidebar">
                         <ul>

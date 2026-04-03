@@ -1,7 +1,33 @@
+:root {
+    --color-text: #000;
+    --color-text-muted: #747474;
+    --color-bg: #fff;
+    --color-surface: #f6f6f6;
+    --color-surface-hover: #E6E6E6;
+    --color-skeleton: #f2f2f2;
+    --color-border: #747474;
+    --color-slider: #ADADAD;
+
+    --font-heading: red-hat-display, sans-serif;
+    --font-body: warnock_proregular, Palatino Linotype, Book Antiqua, Palatino, serif;
+    --font-body-italic: warnock_proitalic, Palatino Linotype, Book Antiqua, Palatino, serif;
+    --font-body-semibold: warnock_prosemibold_subhead, Palatino Linotype, Book Antiqua, Palatino, serif;
+
+    --container-padding: 40px;
+}
+
 body {
     margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 code {

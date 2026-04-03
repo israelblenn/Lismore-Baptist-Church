@@ -7,6 +7,7 @@ const GET_TEAM_MEMBERS = gql`
   query {
     teamMembers {
       data {
+        id
         attributes {
           name
           role
@@ -78,12 +79,12 @@ const OurTeam = () => {
 
       <div className="container-medium">
         <section className="profiles">
-          {teamMembers.map((member, index) => {
+          {teamMembers.map((member) => {
             const memberAttributes = member.attributes || {}
             const pictureUrl = memberAttributes.picture?.data?.attributes?.url || ''
 
             return (
-              <div className="pastor-profile" key={index}>
+              <div className="pastor-profile" key={member.id}>
                 <div className="headshot-wrap">
                   <img
                     className="headshot"

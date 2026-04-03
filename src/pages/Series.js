@@ -82,7 +82,7 @@ const Series = () => {
     <>
       <SermonsHeader />
       <div className="container-medium">
-        <Link className='backlink' to={'/sermons'}>
+        <Link className='backlink' to={'/Sermons'}>
           <img src={back} alt="Back" /> All Sermons & Series
         </Link>
         <div className='series-info'>
@@ -99,7 +99,7 @@ const Series = () => {
         </div>
         <AudioPlayer sermons={sortedSermons} />
         <div className='series-end'>
-          <Link className='end-backlink' to={'/sermons'}>
+          <Link className='end-backlink' to={'/Sermons'}>
             Back to All Sermons and Series
           </Link>
         </div>

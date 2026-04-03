@@ -3,7 +3,6 @@ html {
     -webkit-text-size-adjust: 100%;
     font-family: sans-serif;
     height: 100%;
-    overflow: -moz-scrollbars-vertical;
     overflow-y: scroll;
 }
 
@@ -24,26 +23,24 @@ ul {
 
 body {
     min-height: 100%;
-    color: #000000;
-    background-color: #fff;
+    color: var(--color-text);
+    background-color: var(--color-bg);
     margin: 0;
     font-size: 15px;
-    font-family: red-hat-display, sans-serif;
+    font-family: var(--font-heading);
     line-height: 125%;
-    object-fit: none;
 }
 
 h1 {
-    font-family: red-hat-display, sans-serif;
+    font-family: var(--font-heading);
     font-size: 48px;
     font-weight: 500;
-    line-height: normal;
     margin: 0;
     line-height: 44px;
 }
 
 h2 {
-    font-family: red-hat-display, sans-serif;
+    font-family: var(--font-heading);
     font-size: 36px;
     font-weight: 600;
     line-height: normal;
@@ -51,7 +48,7 @@ h2 {
 }
 
 h3 {
-    font-family: red-hat-display, sans-serif;
+    font-family: var(--font-heading);
     font-size: 20px;
     font-weight: 400;
     line-height: normal;
@@ -59,11 +56,10 @@ h3 {
 }
 
 h4 {
-    color: #747474;
-    margin-bottom: 8px;
+    color: var(--color-text-muted);
     font-size: 15px;
     font-weight: 400;
-    font-family: red-hat-display, sans-serif;
+    font-family: var(--font-heading);
     margin: 2px 0 24px 0;
 }
 
@@ -71,13 +67,13 @@ h5 {
     margin: 0px 0px 6px 0px;
     font-size: 15px;
     font-weight: 800;
-    font-family: red-hat-display, sans-serif;
+    font-family: var(--font-heading);
 }
 
 p {
     margin-top: 0;
     margin-bottom: 0;
-    font-family: warnock_proregular, Palatino Linotype, Book Antiqua, Palatino, serif;
+    font-family: var(--font-body);
     font-size: 16px;
     font-weight: 400;
 }
@@ -85,12 +81,12 @@ p {
 em {
     font-size: 15px;
     font-weight: 600;
-    font-family: red-hat-display, sans-serif;
+    font-family: var(--font-heading);
     font-style: normal;
 }
 
 a {
-    color: #000;
+    color: var(--color-text);
     font-size: 15px;
 }
 
@@ -114,10 +110,10 @@ strong {
 
 select {
     height: 24px;
-    background-color: #F6F6F6;
+    background-color: var(--color-surface);
     border: none;
     border-radius: 5px;
-    font-family: red-hat-display, sans-serif;
+    font-family: var(--font-heading);
     font-weight: 600;
     font-size: 16px;
     padding: 0 4px 0 4px;
@@ -139,7 +135,7 @@ mark {
 
 .container-medium {
     max-width: 1200px;
-    padding: 0 40px 0 40px;
+    padding: 0 var(--container-padding) 0 var(--container-padding);
     margin: auto;
 }
 
@@ -192,7 +188,7 @@ mark {
 
 .loading-skeleton {
     width: 100%;
-    background-color: #f2f2f2;
+    background-color: var(--color-skeleton);
     border-radius: 4px;
 }
 
@@ -207,12 +203,12 @@ mark {
 
 @media only screen and (max-width: 960px) {
 
-    .container-medium {
-        padding: 0 20px 0 20px;
+    :root {
+        --container-padding: 20px;
     }
 
     .loading-shell {
-        padding: 0 20px;
+        padding: 0 var(--container-padding);
     }
 
 }

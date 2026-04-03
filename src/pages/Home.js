@@ -1,3 +1,4 @@
+import { useSyncExternalStore } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import ReactMarkdown from 'react-markdown';
 
@@ -20,6 +21,7 @@ const GET_DATA = gql`
         }
         networks {
             data{
+                id
                 attributes{
                     name
                     description
@@ -33,6 +35,7 @@ const GET_DATA = gql`
         }
         programs(sort: "publishedAt:desc") {
             data {
+                id
                 attributes {
                     title
                     description
@@ -43,11 +46,44 @@ const GET_DATA = gql`
     }
 `
 
+const MOBILE_LOADER_QUERY = '(max-width: 1260px)';
+
+function useMobileLoaderViewport() {
+    return useSyncExternalStore(
+        (onStoreChange) => {
+            const mq = window.matchMedia(MOBILE_LOADER_QUERY);
+            mq.addEventListener('change', onStoreChange);
+            return () => mq.removeEventListener('change', onStoreChange);
+        },
+        () => window.matchMedia(MOBILE_LOADER_QUERY).matches,
+        () => false
+    );
+}
+
 const Home = () => {
-     
-    const { loading, error, data } = useQuery(GET_DATA)
+    const { loading, error, data } = useQuery(GET_DATA);
+    const isMobileLoaderViewport = useMobileLoaderViewport();
 
     if (loading) {
+        if (isMobileLoaderViewport) {
+            return (
+                <div
+                    className="home home--loading-mobile"
+                    role="status"
+                    aria-live="polite"
+                    aria-busy="true"
+                >
+                    <div className="home-loading-mobile-screen">
+                        <div className="home-loading-mobile-inner">
+                            <span className="home-loading-mobile-sr">Loading</span>
+                            <p className="home-loading-mobile-title">Lismore Baptist Church</p>
+                            <div className="home-loading-mobile-spinner" aria-hidden="true" />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div className="home home--loading" aria-hidden="true">
                 <section className="hero">
@@ -266,8 +302,8 @@ const Home = () => {
             <div className="container-medium">
                 <section className="programs">
                     <div className="program-column">
-                        {column1Programs.map((program, index) => (
-                            <div key={index} className="program">
+                        {column1Programs.map((program) => (
+                            <div key={program.id} className="program">
                                 <h2>{program.attributes.title}</h2>
                                 <div className="paragraphgap">
                                     {renderRichText(program.attributes.description)}
@@ -277,8 +313,8 @@ const Home = () => {
                     </div>
                     <div className="programs-breaker"></div>
                     <div className="program-column">
-                        {column2Programs.map((program, index) => (
-                            <div key={index} className="program">
+                        {column2Programs.map((program) => (
+                            <div key={program.id} className="program">
                                 <h2>{program.attributes.title}</h2>
                                 <div className="paragraphgap">
                                     {renderRichText(program.attributes.description)}
@@ -396,9 +432,9 @@ const Home = () => {
                             <p className="network-blurb">Lismore Baptist is dedicated to fostering and supporting a network of growing ministries in the northern rivers region.</p>
                         </div>
                         <div className="networks">
-                            {networks.map((network, index) => {
+                            {networks.map((network) => {
                                 return (
-                                <div key={index} className="network">
+                                <div key={network.id} className="network">
                                     <div className="network-left">
                                         <div>
                                             <h1 className="network-name">{network.attributes.name}</h1>

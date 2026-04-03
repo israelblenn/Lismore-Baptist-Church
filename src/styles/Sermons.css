@@ -15,10 +15,9 @@
 }
 
 .sermonBtn {
-    background-color: #F6F6F6;
+    background-color: var(--color-surface);
     border: none;
     width: 100%;
-    height: 100%;
     cursor: pointer;
     height: 24px;
     transition: 200ms;
@@ -26,7 +25,7 @@
     margin-bottom: 5px;
 
     &:hover {
-        background-color: #E6E6E6;
+        background-color: var(--color-surface-hover);
     }
 }
 
@@ -36,11 +35,11 @@
 }
 
 .downloadSermon {
-    background: #F6F6F6 no-repeat center url(../assets/download.svg);
+    background: var(--color-surface) no-repeat center url(../assets/download.svg);
 }
 
 .viewGuide {
-    background: #F6F6F6 no-repeat center url(../assets/guide.svg);
+    background: var(--color-surface) no-repeat center url(../assets/guide.svg);
 }
 
 .sermonInfo {
@@ -118,7 +117,7 @@
     justify-self: flex-end;
     align-self: center;
     font-style: italic;
-    color: #747474;
+    color: var(--color-text-muted);
 }
 
 .nav-adjacent,
@@ -142,13 +141,13 @@
     height: 48px;
     width: 48px;
     border: none;
-    background-color: #f6f6f6;
+    background-color: var(--color-surface);
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .page-number.active {
-    background-color: #D9D9D9;
+    background-color: var(--color-surface-hover);
 }
 
 .page-number.active em {
@@ -156,7 +155,7 @@
 }
 
 .page-number:hover:not(.active) {
-    background-color: #D9D9D9;
+    background-color: var(--color-surface-hover);
 }
 
 .series-section {
@@ -174,7 +173,7 @@
 .series-item {
     margin: 0.5rem;
     padding: 4px 8px;
-    background: #f6f6f6;
+    background: var(--color-surface);
     border-radius: 4px;
     text-decoration: none;
     transition: background-color 0.2s;
@@ -201,7 +200,7 @@
 }
 
 .featured-series {
-    color: #747474;
+    color: var(--color-text-muted);
 }
 
 .featured-series-item {
@@ -368,13 +367,11 @@
 
 }
 
-@media only screen and (max-width: 959px) {
+@media only screen and (max-width: 960px) {
     .featured-series-item--skeleton:nth-child(n + 2) {
         display: none;
     }
-}
 
-@media only screen and (max-width: 960px) {
     .sermonAttributes {
         display: none;
     }
