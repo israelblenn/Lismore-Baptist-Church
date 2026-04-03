@@ -171,11 +171,29 @@ mark {
     flex-direction: row;
 }
 
-.loading-text{
+.page-loading {
+    min-height: 55vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 48px;
+}
+
+.loading-text {
     font-weight: 400;
-    position: absolute;
-    left: 50%;
-    translate: -50% 50px;
+}
+
+.loading-shell {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.loading-skeleton {
+    width: 100%;
+    background-color: #f2f2f2;
+    border-radius: 4px;
 }
 
 
@@ -191,6 +209,10 @@ mark {
 
     .container-medium {
         padding: 0 20px 0 20px;
+    }
+
+    .loading-shell {
+        padding: 0 20px;
     }
 
 }

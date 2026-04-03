@@ -180,6 +180,7 @@ mark {
     width: 544px;
     height: 320px;
     object-fit: cover;
+    aspect-ratio: 544 / 320;
 }
 
 .purpose-statement {
@@ -423,7 +424,201 @@ mark {
     margin: 16px 0 0 0;
 }
 
+@media (min-width: 1261px) {
+    .hero {
+        min-height: 688px;
+    }
+}
 
+.value-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Loading skeleton — mirrors fixed desktop layout dimensions */
+.home--loading .loading-skeleton {
+    border-radius: 2px;
+}
+
+.home-loading-hero-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 24px;
+    min-height: 0;
+}
+
+.home-loading-title {
+    height: 120px;
+    width: 100%;
+}
+
+.home-loading-gatherings {
+    display: flex;
+    flex: 1;
+    min-height: 220px;
+}
+
+.home-loading-indent {
+    width: 32px;
+    border-left: 1px solid #e8e8e8;
+    margin-right: 32px;
+    flex-shrink: 0;
+}
+
+.home-loading-timetable {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: flex-start;
+}
+
+.home-loading-line {
+    height: 22px;
+    width: 100%;
+}
+
+.home-loading-line--short {
+    width: 55%;
+}
+
+.home-loading-line--medium {
+    width: 72%;
+}
+
+.home-loading-line--center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home-loading-line--narrow {
+    width: 40%;
+    max-width: 280px;
+}
+
+.home-loading-hero-quote {
+    height: 72px;
+    width: 100%;
+}
+
+.home-loading-program {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.home-loading-h2 {
+    height: 44px;
+    width: 70%;
+}
+
+.home-loading-waw-title {
+    height: 48px;
+    width: min(280px, 100%);
+    margin-top: 38px;
+}
+
+.home-loading-purpose .purpose-statement {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+}
+
+.home-loading-statement {
+    height: 40px;
+    width: 100%;
+}
+
+.home-loading-statement--short {
+    width: 85%;
+}
+
+.home-loading-waw-img {
+    width: 544px;
+    height: 320px;
+    flex-shrink: 0;
+}
+
+.home-loading-values-heading {
+    height: 48px;
+    width: 200px;
+    margin: 0 auto 8px;
+}
+
+.home-loading-values {
+    margin-top: 104px;
+    margin-bottom: 152px;
+}
+
+.home-loading-values-grid {
+    display: flex;
+    justify-content: space-between;
+    width: 928px;
+    max-width: 100%;
+    margin-top: 25px;
+    gap: 16px;
+}
+
+.home-loading-value-card {
+    width: 210px;
+    max-width: 23%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.home-loading-value-num {
+    width: 52px;
+    height: 52px;
+}
+
+.home-loading-value-heading {
+    width: 140px;
+    height: 28px;
+}
+
+.home-loading-value-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+
+.home-loading-ellipsis {
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-loading-ellipsis-mark {
+    width: 120px;
+    height: 72px;
+}
+
+.home-loading-network {
+    padding-bottom: 40px;
+}
+
+.home-loading-network-h1 {
+    height: 48px;
+    width: min(320px, 100%);
+}
+
+.home-loading-network-name {
+    height: 40px;
+    width: 85%;
+}
+
+.home-loading-map {
+    width: 192px;
+    height: 192px;
+    flex-shrink: 0;
+}
 
 
 @media only screen and (max-width: 1260px) {
@@ -480,6 +675,7 @@ mark {
         margin-top: -64px;
         z-index: -1;
         height: 400px;
+        aspect-ratio: auto;
     }
 
     .value-icons {
@@ -627,7 +823,42 @@ mark {
         margin: 24px 0 32px 0
     }
 
+    .home--loading .programs {
+        display: flex;
+        flex-direction: column;
+    }
 
+    .home--loading .home-loading-waw-img {
+        width: 100vw;
+        max-width: none;
+        margin: -64px -40px 0 -40px;
+        height: 400px;
+    }
+
+    .home--loading .home-loading-values-grid {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    .home--loading .home-loading-value-card {
+        max-width: calc(50% - 20px);
+        width: auto;
+        flex: 1 1 40%;
+    }
+
+    .home--loading .home-loading-map {
+        width: 100%;
+        height: 200px;
+    }
+
+    .home--loading .network {
+        width: auto;
+        height: auto;
+    }
 
 }
 
@@ -635,6 +866,11 @@ mark {
 
     .waw-img {
         margin: 0 -20px 0 -20px;
+    }
+
+    .home--loading .home-loading-waw-img {
+        margin-left: -20px;
+        margin-right: -20px;
     }
 
     .values {

@@ -27,8 +27,42 @@ const GET_TEAM_MEMBERS = gql`
 const OurTeam = () => {
   const { loading, error, data } = useQuery(GET_TEAM_MEMBERS)
 
-  if (loading) return <em className="loading-text">loading content...</em>
-  if (error) return <em className="loading-text">Error: {error.message}</em>
+  if (loading) {
+    return (
+      <>
+        <section className="header" style={{ backgroundImage: `url(${header})`, backgroundPosition: "50% 25%" }}>
+          <div className="header-blur">
+            <div className="container-medium">
+              <h1 className="header-title">Our Team</h1>
+            </div>
+          </div>
+        </section>
+        <div className="container-medium">
+          <section className="profiles profiles--loading" aria-hidden="true">
+            {[0, 1, 2].map((i) => (
+              <div className="pastor-profile pastor-profile--skeleton" key={i}>
+                <div className="loading-skeleton headshot-skeleton" />
+                <div className="profile-text profile-text--skeleton">
+                  <div className="loading-skeleton skeleton-line skeleton-line--title" />
+                  <div className="loading-skeleton skeleton-line skeleton-line--meta" />
+                  <div className="loading-skeleton skeleton-line" />
+                  <div className="loading-skeleton skeleton-line" />
+                </div>
+              </div>
+            ))}
+          </section>
+        </div>
+      </>
+    )
+  }
+
+  if (error) {
+    return (
+      <section className="page-loading">
+        <em className="loading-text">Error: {error.message}</em>
+      </section>
+    )
+  }
 
   const teamMembers = data.teamMembers.data
 
@@ -50,12 +84,14 @@ const OurTeam = () => {
 
             return (
               <div className="pastor-profile" key={index}>
-                <img
-                  className="headshot"
-                  loading="lazy"
-                  src={`${StrapiURL}${pictureUrl}`}
-                  alt={`Pastor ${memberAttributes.name || 'Unknown'}`}
-                />
+                <div className="headshot-wrap">
+                  <img
+                    className="headshot"
+                    loading="lazy"
+                    src={`${StrapiURL}${pictureUrl}`}
+                    alt={`Pastor ${memberAttributes.name || 'Unknown'}`}
+                  />
+                </div>
                 <div className="profile-text">
                   <h2>{memberAttributes.name || 'Unnamed'}</h2>
                   <h4>{memberAttributes.role || 'No Role Specified'}</h4>

@@ -47,8 +47,162 @@ const Home = () => {
      
     const { loading, error, data } = useQuery(GET_DATA)
 
-    if (loading) return <em className="loading-text">loading content...</em>
-    if (error) return <em className="loading-text">Error: {error.message}</em>
+    if (loading) {
+        return (
+            <div className="home home--loading" aria-hidden="true">
+                <section className="hero">
+                    <div className="backdropblur">
+                        <div className="container-wide">
+                            <div className="hero-edge" />
+                            <div className="container-medium flex">
+                                <div className="hero-content">
+                                    <div className="home-loading-hero-top">
+                                        <div className="loading-skeleton home-loading-title" />
+                                        <div className="home-loading-gatherings">
+                                            <div className="home-loading-indent" />
+                                            <div className="home-loading-timetable">
+                                                <div className="loading-skeleton home-loading-line" />
+                                                <div className="loading-skeleton home-loading-line" />
+                                                <div className="loading-skeleton home-loading-line home-loading-line--short" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="loading-skeleton home-loading-hero-quote" />
+                                </div>
+                                <div className="corner1" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div className="container-medium">
+                    <section className="programs">
+                        <div className="program-column">
+                            <div className="home-loading-program">
+                                <div className="loading-skeleton home-loading-h2" />
+                                <div className="loading-skeleton home-loading-line" />
+                                <div className="loading-skeleton home-loading-line" />
+                                <div className="loading-skeleton home-loading-line home-loading-line--medium" />
+                            </div>
+                            <div className="home-loading-program">
+                                <div className="loading-skeleton home-loading-h2" />
+                                <div className="loading-skeleton home-loading-line" />
+                                <div className="loading-skeleton home-loading-line home-loading-line--short" />
+                            </div>
+                        </div>
+                        <div className="programs-breaker" />
+                        <div className="program-column">
+                            <div className="home-loading-program">
+                                <div className="loading-skeleton home-loading-h2" />
+                                <div className="loading-skeleton home-loading-line" />
+                                <div className="loading-skeleton home-loading-line" />
+                                <div className="loading-skeleton home-loading-line" />
+                                <div className="loading-skeleton home-loading-line home-loading-line--medium" />
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <section className="waw-banner">
+                    <div className="backdropblur">
+                        <div className="container-wide">
+                            <div className="waw-edge" />
+                            <div className="container-medium flex">
+                                <div className="waw-header">
+                                    <div className="loading-skeleton home-loading-waw-title" />
+                                </div>
+                                <div className="corner2" />
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div className="main">
+                    <div className="container-medium">
+                        <section className="waw-section home-loading-purpose">
+                            <div className="purpose-statement">
+                                <div className="loading-skeleton home-loading-statement" />
+                                <div className="loading-skeleton home-loading-statement home-loading-statement--short" />
+                            </div>
+                            <div className="loading-skeleton home-loading-waw-img" />
+                        </section>
+
+                        <section className="values-section home-loading-values">
+                            <div className="values-statement">
+                                <div className="loading-skeleton home-loading-values-heading" />
+                                <div className="loading-skeleton home-loading-line home-loading-line--center" />
+                                <div className="loading-skeleton home-loading-line home-loading-line--center home-loading-line--narrow" />
+                            </div>
+                            <div className="values-wrapper">
+                                <div className="home-loading-values-grid">
+                                    {[0, 1, 2, 3].map((i) => (
+                                        <div key={i} className="home-loading-value-card">
+                                            <div className="loading-skeleton home-loading-value-num" />
+                                            <div className="loading-skeleton home-loading-value-heading" />
+                                            <div className="loading-skeleton home-loading-line" />
+                                            <div className="loading-skeleton home-loading-line home-loading-line--short" />
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="value-icons">
+                                    {[0, 1, 2, 3].map((i) => (
+                                        <div key={i} className="value-icon">
+                                            <div className="loading-skeleton home-loading-value-icon" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section className="waw-section home-loading-vision">
+                            <div className="loading-skeleton home-loading-waw-img" />
+                            <div className="vision-statement">
+                                <div className="loading-skeleton home-loading-statement" />
+                                <div className="loading-skeleton home-loading-statement home-loading-statement--short" />
+                            </div>
+                        </section>
+
+                        <section className="ellipsis home-loading-ellipsis">
+                            <div className="loading-skeleton home-loading-ellipsis-mark" />
+                        </section>
+
+                        <section className="home-loading-network">
+                            <div className="network-title">
+                                <div className="loading-skeleton home-loading-network-h1" />
+                                <div className="loading-skeleton home-loading-line home-loading-line--narrow" />
+                            </div>
+                            <div className="networks">
+                                <div className="network">
+                                    <div className="network-left">
+                                        <div>
+                                            <div className="loading-skeleton home-loading-network-name" />
+                                            <div className="loading-skeleton home-loading-line" />
+                                            <div className="loading-skeleton home-loading-line" />
+                                            <div className="loading-skeleton home-loading-line home-loading-line--medium" />
+                                        </div>
+                                        <div>
+                                            <div className="loading-skeleton home-loading-line home-loading-line--short" />
+                                        </div>
+                                    </div>
+                                    <div className="network-right">
+                                        <div className="loading-skeleton home-loading-map" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    if (error) {
+        return (
+            <section className="page-loading">
+                <em className="loading-text">Error: {error.message}</em>
+            </section>
+        )
+    }
   
     const networks = data.networks.data
     const programs = data.programs.data
@@ -163,6 +317,8 @@ const Home = () => {
                             loading="lazy"
                             alt="churchgoers in conversation"
                             className="waw-img"
+                            width={544}
+                            height={320}
                         />
                     </section>
 
@@ -199,16 +355,16 @@ const Home = () => {
                             </div>
                             <div className="value-icons">
                                 <div className="value-icon">
-                                    <img src={bible} loading="lazy" alt="" className="bibleicon" />
+                                    <img src={bible} loading="lazy" alt="" className="bibleicon" width={200} height={200} />
                                 </div>
                                 <div className="value-icon">
-                                    <img src={participation} loading="lazy" alt="" className="participationicon" />
+                                    <img src={participation} loading="lazy" alt="" className="participationicon" width={200} height={200} />
                                 </div>
                                 <div className="value-icon">
-                                    <img src={freedom} loading="lazy" alt="" className="freedomicon" />
+                                    <img src={freedom} loading="lazy" alt="" className="freedomicon" width={200} height={200} />
                                 </div>
                                 <div className="value-icon">
-                                    <img src={prayer} loading="lazy" alt="" className="prayericon" />
+                                    <img src={prayer} loading="lazy" alt="" className="prayericon" width={200} height={200} />
                                 </div>
                             </div>
                         </div>
@@ -216,7 +372,14 @@ const Home = () => {
 
                     {/* Vision */}
                     <section className="waw-section">
-                        <img src={vision} loading="lazy" alt="young man in conversation eating watermelon" className="waw-img vision-img" />
+                        <img
+                            src={vision}
+                            loading="lazy"
+                            alt="young man in conversation eating watermelon"
+                            className="waw-img vision-img"
+                            width={544}
+                            height={320}
+                        />
                         <div className="vision-statement">
                             <h1 className="statement"><mark><i>Our Vision? </i>A diverse network of worshipping communities passionate about sharing Jesus.</mark></h1>
                         </div>

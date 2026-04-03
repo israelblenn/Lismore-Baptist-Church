@@ -25,18 +25,51 @@ const GET_PARTNERSHIPS = gql`
     }
 `
 
+const PartnershipsSkeleton = () => (
+    <>
+        {[0, 1].map((index) => (
+            <div
+                className={`partner partner--skeleton ${index % 2 === 1 ? 'reversed' : ''}`}
+                key={index}
+                aria-hidden="true"
+            >
+                <div className="partner-info">
+                    <div>
+                        <div className="loading-skeleton partnership-skeleton-title" />
+                        <div className="loading-skeleton partnership-skeleton-line" />
+                        <div className="loading-skeleton partnership-skeleton-line" />
+                        <div className="loading-skeleton partnership-skeleton-line partnership-skeleton-line--short" />
+                    </div>
+                    <div className="loading-skeleton partnership-skeleton-visit" />
+                </div>
+                <div className="loading-skeleton partnership-image partnership-image--placeholder" />
+            </div>
+        ))}
+    </>
+)
+
 const Partnerships = () => {
     const { loading, error, data } = useQuery(GET_PARTNERSHIPS)
 
-    if (loading) return <em className="loading-text">loading content...</em>
     if (error) {
         console.error('Full error details:', error);
-        return <em className="loading-text">Error: {error.message}</em>;
+        return (
+            <>
+                <section className="header" style={{ backgroundImage: `url(${header})`, backgroundPosition: "50% 60%" }}>
+                    <div className="header-blur">
+                        <div className="container-medium">
+                            <h1 className="header-title">Partnerships</h1>
+                        </div>
+                    </div>
+                </section>
+                <section className="page-loading">
+                    <em className="loading-text">Error: {error.message}</em>
+                </section>
+            </>
+        );
     }
 
-    const partnerships = data.partnerships.data
-    
-    console.log(partnerships);
+    const partnerships = data?.partnerships?.data ?? []
     
 
     const openLink = (url) => {
@@ -83,25 +116,36 @@ const Partnerships = () => {
             </section>
 
             <section className="partnerships-wrapper container-medium">
-                {partnerships.map((partnership, index) => {
-                    const partnershipAttributes = partnership.attributes || {}
-                    const imageUrl = partnershipAttributes.Image?.data?.attributes?.url || ''
+                {loading ? (
+                    <PartnershipsSkeleton />
+                ) : (
+                    partnerships.map((partnership, index) => {
+                        const partnershipAttributes = partnership.attributes || {}
+                        const imageUrl = partnershipAttributes.Image?.data?.attributes?.url || ''
 
-                    return (
-                        <div className={`partner ${index % 2 === 1 ? 'reversed' : ''}`} key={index}>
-                            <div className="partner-info">
-                                <div>
-                                    <h2>{partnershipAttributes.Title || 'Unnamed'}</h2>
-                                    <p>{renderRichText(partnershipAttributes.Description || 'Unnamed')}</p>
+                        return (
+                            <div className={`partner ${index % 2 === 1 ? 'reversed' : ''}`} key={partnership.id ?? index}>
+                                <div className="partner-info">
+                                    <div>
+                                        <h2>{partnershipAttributes.Title || 'Unnamed'}</h2>
+                                        <p>{renderRichText(partnershipAttributes.Description || 'Unnamed')}</p>
+                                    </div>
+                                    <button type="button" className="visit-button" onClick={() => openLink(`${partnershipAttributes.Website}`)}>
+                                        <p>Visit Website</p>
+                                    </button>
                                 </div>
-                                <button className="visit-button" onClick={() => openLink(`${partnershipAttributes.Website}`)}>
-                                    <p>Visit Website</p>
-                                </button>
+                                <img
+                                    loading="lazy"
+                                    className="partnership-image"
+                                    src={`${StrapiURL}${imageUrl}`}
+                                    alt={`${partnershipAttributes.Title || 'Partnership'} partnership`}
+                                    width={544}
+                                    height={296}
+                                />
                             </div>
-                            <img loading="lazy" className="partnership-image" src={`${StrapiURL}${imageUrl}`} alt={`Pastor ${partnershipAttributes.Title || 'Unknown'}`} />
-                        </div>
-                    )
-                })}
+                        )
+                    })
+                )}
             </section>
         </>
     )

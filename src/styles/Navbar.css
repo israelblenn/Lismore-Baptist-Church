@@ -15,7 +15,10 @@ nav {
 
 .logo {
     margin-top: 2px;
+    width: 192px;
     height: 48px;
+    object-fit: contain;
+    display: block;
 }
 
 .hopefield {

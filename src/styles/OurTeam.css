@@ -4,14 +4,61 @@
     flex-wrap: wrap;
 }
 
+.profiles--loading {
+    /* One row of three square placeholders + text skeletons (matches desktop grid) */
+    min-height: 480px;
+}
+
 .pastor-profile {
     margin-top: 16px;
     width: 352px;
+    flex: 0 0 352px;
     height: 100%;
 }
 
+.headshot-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #f2f2f2;
+}
+
 .headshot {
-    width: 352px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.headshot-skeleton {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 0;
+}
+
+.profile-text--skeleton {
+    margin-top: 16px;
+}
+
+.skeleton-line {
+    height: 14px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+
+.skeleton-line--title {
+    height: 28px;
+    width: 70%;
+    margin-bottom: 12px;
+}
+
+.skeleton-line--meta {
+    width: 45%;
+    margin-bottom: 16px;
+}
+
+.pastor-profile--skeleton .skeleton-line:last-child {
+    margin-bottom: 0;
 }
 
 .profile-text {
@@ -32,14 +79,20 @@
         margin-bottom: -56px;
     }
 
+    .profiles--loading {
+        min-height: 0;
+    }
+
     .pastor-profile {
         width: auto;
+        flex: 1 1 100%;
         margin-bottom: 56px;
         max-width: 352px;
     }
 
-    .headshot {
-        width: 100%;
+    .profiles--loading .pastor-profile--skeleton {
+        flex: 1 1 100%;
+        max-width: 352px;
     }
 
 }

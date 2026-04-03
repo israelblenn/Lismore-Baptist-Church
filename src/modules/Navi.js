@@ -72,7 +72,7 @@ const Navbar = () => {
     return (
         <section className="container-medium">
             <nav className="desktop-navigation">
-                <Link to="/"><img src={logo} loading="lazy" alt="" className="logo" /></Link>
+                <Link to="/"><img src={logo} alt="" className="logo" width="192" height="48" /></Link>
                 <ul className="navLinks">
                     <li><NavLink id="home" to="/" className="navLink" data-text="Home">Home</NavLink></li>
                     <li><NavLink id="our-team" to="OurTeam" className="navLink" data-text="Our Team">Our Team</NavLink></li>

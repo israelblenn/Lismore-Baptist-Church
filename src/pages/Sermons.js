@@ -1,56 +1,10 @@
 import { useQuery, gql } from '@apollo/client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from "react-router-dom"
 import AudioPlayer from '../modules/AudioPlayer'
 import SermonsHeader from '../modules/SermonsHeader'
 
 const StrapiURL = process.env.REACT_APP_STRAPI_URL
-
-const SERMONS = gql`
-    query GetSermons($limit: Int, $start: Int) {
-        sermons(pagination: { limit: $limit, start: $start }) {
-            data {
-                id
-                attributes {
-                    title
-                    speaker {
-                        data {
-                            id
-                            attributes {
-                                name
-                            }
-                        }
-                    }
-                    scripture
-                    date
-                    series {
-                        data {
-                            id
-                            attributes {
-                                title
-                            }
-                        }
-                    }
-                    recording
-                    guide {
-                        data {
-                            attributes {
-                                name
-                                url
-                            }
-                        }
-                    }
-                }
-            }
-            meta {
-                pagination {
-                    total
-                }
-            }
-        }
-    }
-`
-
 
 const SPEAKERS = gql`
     query GetSpeakers {
@@ -142,72 +96,70 @@ const Sermons = () => {
     const [sermonsPerPage, setSermonsPerPage] = useState(20)
     const [selectedSpeaker, setSelectedSpeaker] = useState('All Speakers')
 
-    const { loading: sermonsLoading, error: sermonsError, refetch: refetchSermons } = useQuery(SERMONS, {
-        variables: {
-            limit: sermonsPerPage === 'All' ? 1000 : sermonsPerPage,
-            start: (currentPage - 1) * (sermonsPerPage === 'All' ? 1000 : sermonsPerPage),
-        },
-        notifyOnNetworkStatusChange: true,
-    })
-
-    console.log('GraphQL Response:', sermonsLoading)
-
-
     const { loading: speakersLoading, error: speakersError, data: speakersData } = useQuery(SPEAKERS)
     const { loading: seriesLoading, error: seriesError, data: seriesData } = useQuery(SERIES)
 
-    useEffect(() => {
-        refetchSermons()
-    }, [currentPage, sermonsPerPage, selectedSpeaker, refetchSermons])
+    if (speakersError) {
+        return (
+            <>
+                <SermonsHeader />
+                <section className="page-loading">
+                    <em className="loading-text">Error: {speakersError.message}</em>
+                </section>
+            </>
+        )
+    }
+    if (seriesError) {
+        return (
+            <>
+                <SermonsHeader />
+                <section className="page-loading">
+                    <em className="loading-text">Error: {seriesError.message}</em>
+                </section>
+            </>
+        )
+    }
 
-    if (sermonsLoading || speakersLoading || seriesLoading) return <em className="loading-text">loading content...</em>
-    if (sermonsError) return <em className="loading-text">Error: {sermonsError.message}</em>
-    if (speakersError) return <em className="loading-text">Error: {speakersError.message}</em>
-    if (seriesError) return <em className="loading-text">Error: {seriesError.message}</em>
+    const speakersList = speakersData?.speakers?.data ?? []
+    const seriesList = seriesData?.seriesp?.data ?? []
+    const speakers = ['All Speakers', ...speakersList.map(speaker => speaker.attributes.name)]
 
-    // Get unique speakers from speakersData
-    const speakers = ['All Speakers', ...speakersData.speakers.data.map(speaker => speaker.attributes.name)]
-
-    // Get all sermons
-    const allSermons = speakersData.speakers.data.flatMap(speaker =>
-        speaker.attributes.sermons.data.map(sermon => ({
-            ...sermon,
-            attributes: {
-                ...sermon.attributes,
-                speaker: {
-                    data: {
-                        attributes: {
-                            name: speaker.attributes.name
+    const allSermons = speakersLoading
+        ? []
+        : speakersList.flatMap(speaker =>
+            speaker.attributes.sermons.data.map(sermon => ({
+                ...sermon,
+                attributes: {
+                    ...sermon.attributes,
+                    speaker: {
+                        data: {
+                            attributes: {
+                                name: speaker.attributes.name
+                            }
                         }
                     }
                 },
-            }
-        }))
-    )
+            }))
+        )
 
-    
-    
-
-    // Filter sermons by selected speaker
     const filteredSermons = selectedSpeaker === 'All Speakers'
         ? allSermons
         : allSermons.filter(sermon => sermon.attributes.speaker.data.attributes.name === selectedSpeaker)
 
-    // Sort the sermons by date in descending order
     const sortedSermons = [...filteredSermons].sort((a, b) => {
         const dateA = new Date(a.attributes.date)
         const dateB = new Date(b.attributes.date)
         return dateB - dateA
     })
 
-    // Calculate the total number of pages
     const totalSermons = filteredSermons.length
-    const totalPages = sermonsPerPage === 'All' ? 1 : Math.ceil(totalSermons / sermonsPerPage)
+    const totalPages = sermonsPerPage === 'All' ? 1 : Math.max(1, Math.ceil(totalSermons / sermonsPerPage))
 
-    // Get the sermons for the current page
-    const currentSermons = sermonsPerPage === 'All'
-        ? sortedSermons
-        : sortedSermons.slice((currentPage - 1) * sermonsPerPage, currentPage * sermonsPerPage)
+    const currentSermons = speakersLoading
+        ? []
+        : sermonsPerPage === 'All'
+            ? sortedSermons
+            : sortedSermons.slice((currentPage - 1) * sermonsPerPage, currentPage * sermonsPerPage)
 
     // Function to handle page change
     const handlePageChange = (pageNumber) => {
@@ -226,13 +178,10 @@ const Sermons = () => {
         setCurrentPage(1) // Reset to the first page
     }
 
-    console.log(currentSermons);
-    
-
     return (
         <>
             <SermonsHeader />
-            <FeaturedSeries seriesData={seriesData.seriesp.data} />
+            <FeaturedSeries seriesData={seriesList} seriesLoading={seriesLoading} />
             <section className="container-medium">
                 <p className='sermons-description'>
                     This is an audio archive of sermons preached at our Sunday gatherings. All sermons are available to stream or download for free.
@@ -242,42 +191,110 @@ const Sermons = () => {
                 <div className='filters-wrapper'>
                     <h2>All Sermons</h2>
                     <div className="filters">
-                        <select value={selectedSpeaker} onChange={handleSpeakerChange}>
-                            {speakers.map(speaker => (
-                                <option key={speaker} value={speaker}>{speaker}</option>
-                            ))}
+                        <select
+                            value={selectedSpeaker}
+                            onChange={handleSpeakerChange}
+                            disabled={speakersLoading}
+                            aria-busy={speakersLoading}
+                        >
+                            {speakersLoading ? (
+                                <option value="All Speakers">Loading speakers…</option>
+                            ) : (
+                                speakers.map(speaker => (
+                                    <option key={speaker} value={speaker}>{speaker}</option>
+                                ))
+                            )}
                         </select>
-                        <select value={sermonsPerPage} onChange={handleSermonsPerPageChange}>
+                        <select
+                            value={sermonsPerPage}
+                            onChange={handleSermonsPerPageChange}
+                            disabled={speakersLoading}
+                        >
                             {[10, 20, 50, 80, 'All'].map(option => (
                                 <option key={option} value={option}>{option}</option>
                             ))}
                         </select>
                     </div>
                 </div>
-                <AudioPlayer sermons={currentSermons} />
-                <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+                {speakersLoading ? (
+                    <SermonsListSkeleton rows={sermonsPerPage === 'All' ? 20 : Math.min(sermonsPerPage, 20)} />
+                ) : (
+                    <AudioPlayer sermons={currentSermons} />
+                )}
+                {speakersLoading ? (
+                    <div className="loading-skeleton sermons-loading-pagination" aria-hidden="true" />
+                ) : (
+                    <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+                )}
             </section>
 
             <section className="container-medium series-section">
                 <h2>All Series</h2>
                 <div className="series-list">
-                    {seriesData.seriesp.data.map(series => (
-                        <a key={series.id} href={`/series/${series.id}`} className="series-item">
-                            {series.attributes.title}
-                        </a>
-                    ))}
+                    {seriesLoading ? (
+                        <SeriesListSkeleton />
+                    ) : (
+                        seriesList.map(series => (
+                            <a key={series.id} href={`/series/${series.id}`} className="series-item">
+                                {series.attributes.title}
+                            </a>
+                        ))
+                    )}
                 </div>
             </section>
         </>
     )
 }
 
-const FeaturedSeries = ({ seriesData }) => {
+const SermonsListSkeleton = ({ rows }) => (
+    <div className="sermons sermons--skeleton" aria-hidden="true">
+        {Array.from({ length: rows }).map((_, index) => (
+            <div className="loading-skeleton sermons-loading-row" key={index} />
+        ))}
+    </div>
+)
+
+const SeriesListSkeleton = () => (
+    <>
+        {Array.from({ length: 12 }).map((_, index) => (
+            <span className="series-item series-item--skeleton loading-skeleton" key={index} aria-hidden="true" />
+        ))}
+    </>
+)
+
+const FeaturedSeriesSkeletonCards = () => (
+    <>
+        {[0, 1, 2].map((i) => (
+            <div className="featured-series-item featured-series-item--skeleton" key={i} aria-hidden="true">
+                <div className="featured-series-skeleton-bg" />
+                <div className="featured-series-date-wrapper">
+                    <div className="loading-skeleton featured-series-skeleton-date" />
+                </div>
+                <div className="featured-series-title">
+                    <div className="loading-skeleton featured-series-skeleton-title" />
+                </div>
+            </div>
+        ))}
+    </>
+)
+
+const FeaturedSeries = ({ seriesData, seriesLoading }) => {
 
     let seriesCount = 3
 
-    if (window.innerWidth < 960) {
+    if (typeof window !== 'undefined' && window.innerWidth < 960) {
         seriesCount = 1
+    }
+
+    if (seriesLoading) {
+        return (
+            <section className="container-medium">
+                <em className="featured-series">FEATURED SERIES</em>
+                <div className="featured-series-list">
+                    <FeaturedSeriesSkeletonCards />
+                </div>
+            </section>
+        )
     }
 
     if (!seriesData || !Array.isArray(seriesData)) {
