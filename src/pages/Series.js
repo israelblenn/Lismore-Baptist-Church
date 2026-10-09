@@ -44,6 +44,7 @@ const GET_SERIES = gql`
                   }
                 }
                 recording
+                video
                 guide {
                   data {
                     attributes {

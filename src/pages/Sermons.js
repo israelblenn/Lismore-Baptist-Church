@@ -37,6 +37,7 @@ const SPEAKERS = gql`
                                     }
                                 }
                                 recording
+                                video
                                 guide {
                                     data {
                                         attributes {

@@ -159,6 +159,10 @@
             window.open(sermon.attributes.recording)
         }
 
+        const openVideo = () => {
+            window.open(sermon.attributes.video, '_blank', 'noopener,noreferrer')
+        }
+
         const openGuide = (e) => {
             e.stopPropagation()
             const guides = sermon.attributes.guide.data
@@ -209,6 +213,9 @@
                     <button id="play-icon" onClick={togglePlay} style={{ backgroundImage: `url(${icon})` }} aria-label={isPlaying ? "Pause" : "Play"}>
                         <div className="play-icon-hover"></div>
                     </button>
+                    {sermon.attributes.video && (
+                        <button className="sermonBtn watchVideo" onClick={openVideo} aria-label="Watch on YouTube" />
+                    )}
                     <button className="sermonBtn downloadSermon" onClick={openRecording} aria-label="Download sermon" />
                     {sermon.attributes.guide.data.length > 0 && (<button className="sermonBtn viewGuide" onClick={openGuide} aria-label="View study guide" />)}
                 </div>

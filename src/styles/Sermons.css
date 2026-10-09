@@ -34,6 +34,10 @@
     height: 64px;
 }
 
+.watchVideo {
+    background: var(--color-surface) no-repeat center url(../assets/youtube.svg);
+}
+
 .downloadSermon {
     background: var(--color-surface) no-repeat center url(../assets/download.svg);
 }
